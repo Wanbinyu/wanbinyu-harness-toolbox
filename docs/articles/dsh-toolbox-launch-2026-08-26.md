@@ -4,6 +4,8 @@
 
 访问地址：<https://wanbinyu.github.io/wanbinyu-harness-toolbox/>
 
+![DSH Toolbox 首页与本地水波背景](images/dsh-toolbox-homepage-2026-08-26.png)
+
 如果你正在 Windows 上尝试 DeepSeek Harness，可能遇到过这些问题：第一次安装需要准备哪些环境？启动之后去哪里看状态？插件如何选择和安装？下载的文件是不是对应明确版本？
 
 DSH Toolbox 想做的事情很简单：把启动器、插件、实验工具和可核验的下载信息整理到一个页面，让第一次使用和后续维护都少走一些弯路。
@@ -26,6 +28,8 @@ DSH Toolbox 想做的事情很简单：把启动器、插件、实验工具和�
 启动器仍提供安装版和便携版。Windows 安装包的历代 GitHub Release 请求量目前已经超过 350 次；这个数字是文件请求次数，不等于独立用户数或实际安装数。
 
 [查看 v0.4.0 Release](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.4.0)
+
+![dsh-launcher v0.4.0 Windows 下载区域](images/dsh-toolbox-download-2026-08-26.png)
 
 ### 2. DSH Toolbox：一个公开、双语、可验证的下载入口
 
