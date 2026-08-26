@@ -7,6 +7,11 @@ An independent third-party index of plugins and companion tools for [DeepSeek Ha
 > [!IMPORTANT]
 > This toolbox is maintained independently by [Wanbinyu](https://github.com/Wanbinyu). It is not an official DeepSeek project and is not supported, certified, or security-reviewed by DeepSeek. Refer to each project's README, release history, and license.
 
+## Latest Release
+
+- [Open DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
+- Windows launcher [`dsh-launcher v0.4.0`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.4.0) now supports one-click Harness installation, updates, repair, and managed removal.
+
 ## Plugin Bundles
 
 These projects provide `dsh.bundle.patch` in `package.json` and ship a `cordis.patch.yml`, so they can be installed through a Harness profile's plugin flow:
@@ -26,7 +31,7 @@ Exact, version-pinned Release installation commands are stored in [`plugins.json
 
 | Project | Type | What it provides | Use |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Double-click or use `dsh` and `deepseek` to start Harness Web, control it from the tray, and open the browser after readiness. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.3.7/dsh-launcher-setup.exe). |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray management. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.4.0/dsh-launcher-setup.exe). |
 
 The launcher is not a Cordis plugin and does not need `cordis.yml` or `dsh.bundle`. Keeping it separate avoids confusing Harness extensions with tools that help start Harness.
 
@@ -50,6 +55,8 @@ You can search the GitHub [`dsh-plugin`](https://github.com/topics/dsh-plugin) t
 Official discussion entry point: [DeepSeek Harness Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions). Catalog showcase: [Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045).
 
 ## Static Toolbox Site
+
+Live site: <https://wanbinyu.github.io/wanbinyu-harness-toolbox/>
 
 `site/` turns this repository's `plugins.json` into a bilingual, responsive download and plugin catalog. GitHub Release download counts and SHA-256 digests are collected at build time. Viewing the site sends no analytics requests and downloads are never proxied; every download button points directly to a pinned GitHub Release asset.
 
