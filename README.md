@@ -49,6 +49,17 @@
 
 官方讨论入口：[DeepSeek Harness Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions)。本目录的展示帖：[Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)。
 
+## 静态工具中心
+
+`site/` 使用本仓库的 `plugins.json` 生成双语响应式下载与插件目录。Release 下载量和 SHA-256 摘要在构建时从 GitHub API 获取，浏览页面时不会连接统计服务，也不会代理安装包；下载按钮直接指向固定版本的 GitHub Release 资产。
+
+```sh
+npm ci
+npm run site:build
+```
+
+构建结果位于 `dist/`。匿名 GitHub API 遇到限流时，本地构建会复用上一次成功构建的统计数据；CI 使用 `GITHUB_TOKEN` 获取当前数据。`.github/workflows/pages.yml` 会验证目录、构建网站并部署 GitHub Pages，同时每天刷新一次构建时下载量。
+
 ## 许可证
 
 目录采用 MIT 许可证；收录项目分别遵循各自仓库的许可证。

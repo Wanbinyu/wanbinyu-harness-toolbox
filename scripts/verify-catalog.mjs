@@ -16,8 +16,9 @@ function requiredString(value, path) {
 }
 
 async function fetchJson(url) {
+  const authorization = process.env.GITHUB_TOKEN ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}
   const response = await fetch(url, {
-    headers: { accept: 'application/vnd.github+json', 'user-agent': 'wanbinyu-harness-toolbox' },
+    headers: { accept: 'application/vnd.github+json', 'user-agent': 'wanbinyu-harness-toolbox', ...authorization },
   })
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
   return response.json()
@@ -31,13 +32,17 @@ async function fetchText(url) {
   return response.text()
 }
 
-async function checkUrl(url) {
-  const response = await fetch(url, {
-    method: 'HEAD',
-    redirect: 'follow',
-    headers: { 'user-agent': 'wanbinyu-harness-toolbox' },
-  })
-  return response.ok
+function releaseTag(url) {
+  const match = new URL(url).pathname.match(/\/releases\/tag\/([^/]+)$/)
+  if (match === null) throw new Error(`release URL has no tag: ${url}`)
+  return decodeURIComponent(match[1])
+}
+
+function releaseAsset(release, url, label) {
+  const name = basename(new URL(url).pathname)
+  const asset = (release.assets ?? []).find(candidate => candidate.name === name)
+  if (asset === undefined) fail(`${label} ${name} is missing from ${release.tag_name}`)
+  return asset
 }
 
 if (catalog.schemaVersion !== 2) fail(`schemaVersion must be 2, got ${String(catalog.schemaVersion)}`)
@@ -106,23 +111,41 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       const assetNames = new Set((release.assets ?? []).map(asset => asset.name))
       if (!assetNames.has(packageAsset)) fail(`${project.name}: package asset ${packageAsset} is missing from latest release`)
       if (!project.install.includes(project.packageUrl)) fail(`${project.name}: install command is not pinned to packageUrl`)
-      if (!(await checkUrl(project.packageUrl))) fail(`${project.name}: packageUrl is not reachable`)
     } else if (project.category === 'tool') {
       requiredString(project.releaseUrl, `${prefix}.releaseUrl`)
       requiredString(project.installerUrl, `${prefix}.installerUrl`)
+      requiredString(project.installerChecksumUrl, `${prefix}.installerChecksumUrl`)
       requiredString(project.portableUrl, `${prefix}.portableUrl`)
-      const release = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
+      requiredString(project.portableChecksumUrl, `${prefix}.portableChecksumUrl`)
+      const expectedTag = releaseTag(project.releaseUrl)
+      const release = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(expectedTag)}`)
+      const latestRelease = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
       if (release.tag_name !== `v${project.latestVersion}`) {
-        fail(`${project.name}: catalog version ${project.latestVersion} != latest release ${release.tag_name}`)
+        fail(`${project.name}: catalog version ${project.latestVersion} != release ${release.tag_name}`)
+      }
+      if (latestRelease.tag_name !== expectedTag) {
+        fail(`${project.name}: catalog release ${expectedTag} != latest release ${latestRelease.tag_name}`)
       }
       if (!release.html_url || project.releaseUrl !== release.html_url) {
         fail(`${project.name}: releaseUrl does not point to the latest release`)
       }
-      const assetNames = new Set((release.assets ?? []).map(asset => asset.name))
-      if (!assetNames.has(basename(new URL(project.installerUrl).pathname))) fail(`${project.name}: installer asset is missing from latest release`)
-      if (!assetNames.has(basename(new URL(project.portableUrl).pathname))) fail(`${project.name}: portable asset is missing from latest release`)
-      if (!(await checkUrl(project.installerUrl))) fail(`${project.name}: installerUrl is not reachable`)
-      if (!(await checkUrl(project.portableUrl))) fail(`${project.name}: portableUrl is not reachable`)
+      releaseAsset(release, project.installerUrl, `${project.name}: installer asset`)
+      releaseAsset(release, project.installerChecksumUrl, `${project.name}: installer checksum`)
+      releaseAsset(release, project.portableUrl, `${project.name}: portable asset`)
+      releaseAsset(release, project.portableChecksumUrl, `${project.name}: portable checksum`)
+      for (const [downloadIndex, download] of (project.experimentalDownloads ?? []).entries()) {
+        const downloadPrefix = `${prefix}.experimentalDownloads[${downloadIndex}]`
+        requiredString(download.platform, `${downloadPrefix}.platform`)
+        requiredString(download.version, `${downloadPrefix}.version`)
+        requiredString(download.releaseUrl, `${downloadPrefix}.releaseUrl`)
+        requiredString(download.assetUrl, `${downloadPrefix}.assetUrl`)
+        requiredString(download.checksumUrl, `${downloadPrefix}.checksumUrl`)
+        requiredString(download.requires, `${downloadPrefix}.requires`)
+        const tag = releaseTag(download.releaseUrl)
+        const channelRelease = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(tag)}`)
+        releaseAsset(channelRelease, download.assetUrl, `${project.name}: ${download.platform} asset`)
+        releaseAsset(channelRelease, download.checksumUrl, `${project.name}: ${download.platform} checksum`)
+      }
     } else {
       fail(`${project.name}: unsupported category ${project.category}`)
     }

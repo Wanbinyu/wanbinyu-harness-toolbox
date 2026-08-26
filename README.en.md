@@ -49,6 +49,17 @@ You can search the GitHub [`dsh-plugin`](https://github.com/topics/dsh-plugin) t
 
 Official discussion entry point: [DeepSeek Harness Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions). Catalog showcase: [Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045).
 
+## Static Toolbox Site
+
+`site/` turns this repository's `plugins.json` into a bilingual, responsive download and plugin catalog. GitHub Release download counts and SHA-256 digests are collected at build time. Viewing the site sends no analytics requests and downloads are never proxied; every download button points directly to a pinned GitHub Release asset.
+
+```sh
+npm ci
+npm run site:build
+```
+
+The generated site is written to `dist/`. If anonymous GitHub API access is rate-limited, a local rebuild reuses the last successful release metadata; CI uses `GITHUB_TOKEN` for fresh data. `.github/workflows/pages.yml` verifies the catalog, builds the site, deploys GitHub Pages, and refreshes build-time counts daily.
+
 ## License
 
 The catalog is released under the MIT License. Each listed project keeps its own license.

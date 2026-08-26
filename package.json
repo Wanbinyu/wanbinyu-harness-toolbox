@@ -9,7 +9,9 @@
     "node": ">=22.19.0"
   },
   "scripts": {
-    "verify": "node scripts/verify-catalog.mjs",
-    "verify:catalog": "node scripts/verify-catalog.mjs"
+    "verify": "npm run verify:catalog && npm run site:build && npm run site:test",
+    "verify:catalog": "node scripts/verify-catalog.mjs",
+    "site:build": "node scripts/build-site.mjs",
+    "site:test": "node --test scripts/site.test.mjs"
   }
 }
