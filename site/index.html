@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
     <title>Wanbinyu DSH Toolbox</title>
     <link rel="stylesheet" href="./styles.css">
+    <script defer src="./waves.js"></script>
     <script type="module" src="./app.js"></script>
   </head>
   <body>
@@ -101,20 +102,20 @@
           <div class="download-panel">
             <div class="download-primary">
               <span class="download-kicker">Windows x64</span>
-              <a class="button button-primary button-download" id="installer-download" href="#" rel="noopener">
+              <a class="button button-primary button-download" id="installer-download" href="https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.4.0/dsh-launcher-setup.exe" rel="noopener">
                 <span data-i18n="downloadInstaller">下载安装版</span>
                 <small id="installer-size">—</small>
               </a>
               <p class="download-count"><strong id="installer-count">—</strong> <span data-i18n="assetDownloads">次 GitHub 资产下载</span></p>
             </div>
             <div class="download-secondary">
-              <a id="portable-download" href="#" rel="noopener" data-i18n="downloadPortable">便携版 EXE</a>
+              <a id="portable-download" href="https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.4.0/dsh-launcher.exe" rel="noopener" data-i18n="downloadPortable">便携版 EXE</a>
               <span><strong id="portable-count">—</strong> <span data-i18n="cumulativeDownloadsShort">次累计下载</span></span>
             </div>
             <div class="checksum-row">
               <span data-i18n="checksum">SHA-256</span>
               <code id="installer-digest">—</code>
-              <a id="installer-checksum" href="#" rel="noopener" data-i18n="checksumFile">校验文件</a>
+              <a id="installer-checksum" href="https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.4.0/dsh-launcher-setup.exe.sha256" rel="noopener" data-i18n="checksumFile">校验文件</a>
             </div>
             <p class="download-note" data-i18n="downloadNote">安装包尚未使用商业代码签名，Windows 首次运行可能显示 SmartScreen。下载量是文件请求数，不代表独立用户或安装数。</p>
           </div>
@@ -128,8 +129,8 @@
           <div class="android-body">
             <p data-i18n="androidWarning">APK 不能独立运行 DeepSeek Harness，必须连接一台已经运行 Harness 的 Windows 电脑；不要用于公网、公共 Wi-Fi 或访客网络。</p>
             <div class="android-actions">
-              <a class="button button-secondary" id="android-download-link" href="#" rel="noopener" data-i18n="downloadAndroid">下载 Android APK</a>
-              <a id="android-release-link" href="#" rel="noopener" data-i18n="readSafety">先阅读安全说明</a>
+              <a class="button button-secondary" id="android-download-link" href="https://github.com/Wanbinyu/dsh-launcher/releases/download/android-v0.1.2/dsh-launcher-android-v0.1.2-experimental-requires-windows-pc.apk" rel="noopener" data-i18n="downloadAndroid">下载 Android APK</a>
+              <a id="android-release-link" href="https://github.com/Wanbinyu/dsh-launcher/releases/tag/android-v0.1.2" rel="noopener" data-i18n="readSafety">先阅读安全说明</a>
               <span><strong id="android-count">—</strong> <span data-i18n="downloadsShort">次下载</span></span>
             </div>
           </div>

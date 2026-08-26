@@ -1,5 +1,3 @@
-import './waves.js'
-
 const translations = {
   zh: {
     skip: '跳到主要内容', navLauncher: '启动器', navPlugins: '插件', navTrust: '验证',
