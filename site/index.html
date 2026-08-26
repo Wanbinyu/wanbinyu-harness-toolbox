@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1220">
+    <meta name="description" content="Wanbinyu 独立维护的 DeepSeek Harness 启动器、插件与诊断工具中心。">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+    <title>Wanbinyu DSH Toolbox</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Wanbinyu DSH Toolbox">
+        <span class="brand-mark" aria-hidden="true">W</span>
+        <span class="brand-copy">
+          <strong>DSH Toolbox</strong>
+          <small>by Wanbinyu</small>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="#launcher" data-i18n="navLauncher">启动器</a>
+        <a href="#plugins" data-i18n="navPlugins">插件</a>
+        <a href="#trust" data-i18n="navTrust">验证</a>
+      </nav>
+      <div class="language-switch" role="group" aria-label="Language">
+        <button type="button" data-language="zh" aria-pressed="true">中文</button>
+        <button type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="eyebrow">独立维护 · 本地优先 · 可验证</p>
+          <h1 data-i18n="heroTitle">让 DeepSeek Harness 更容易启动、观察和信任。</h1>
+          <p class="hero-lede" data-i18n="heroLede">一个入口，整理启动器、状态插件和只读诊断工具。每个下载都回到可核验的 GitHub Release。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#launcher" data-i18n="exploreLauncher">下载 Windows 启动器</a>
+            <a class="button button-secondary" href="#plugins" data-i18n="explorePlugins">浏览插件</a>
+          </div>
+          <p class="independence" data-i18n="independence">独立社区项目，非 DeepSeek 官方产品，也不代表 DeepSeek 官方提供支持、认证或安全保证。</p>
+        </div>
+
+        <div class="hero-console" aria-label="Toolbox overview">
+          <div class="console-topbar">
+            <span></span><span></span><span></span>
+            <code>dsh toolbox</code>
+          </div>
+          <div class="console-body">
+            <p><span class="prompt">$</span> dsh status</p>
+            <div class="status-row"><span class="status-dot"></span><span data-i18n="consoleReady">Harness Web 已就绪</span><strong>127.0.0.1:3080</strong></div>
+            <p><span class="prompt">$</span> toolbox verify</p>
+            <div class="verify-grid">
+              <span data-i18n="consoleProjects">已验证项目</span><strong id="project-count">7</strong>
+              <span data-i18n="consoleNetwork">运行时统计</span><strong data-i18n="consoleNone">无</strong>
+              <span data-i18n="consoleSource">下载来源</span><strong>GitHub Release</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" id="trust" aria-label="Trust properties">
+        <div><strong data-i18n="trustPinnedTitle">固定版本</strong><span data-i18n="trustPinnedBody">不会从默认分支安装未知内容</span></div>
+        <div><strong data-i18n="trustHashTitle">SHA-256</strong><span data-i18n="trustHashBody">安装器提供独立校验文件</span></div>
+        <div><strong data-i18n="trustPrivateTitle">隐私优先</strong><span data-i18n="trustPrivateBody">网站无遥测、无广告、无第三方字体</span></div>
+        <div><strong data-i18n="trustCompatTitle">兼容记录</strong><span data-i18n="trustCompatBody">明确记录已验证的 Harness 版本</span></div>
+      </section>
+
+      <section class="launcher-section" id="launcher">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="launcherEyebrow">推荐入口</p>
+          <h2 data-i18n="launcherTitle">从 Windows 启动器开始</h2>
+          <p data-i18n="launcherLead">双击或输入短命令启动 Harness Web；托盘负责状态、日志、重启和退出。</p>
+        </div>
+
+        <article class="launcher-card">
+          <div class="launcher-main">
+            <div class="launcher-icon" aria-hidden="true">
+              <span>DSH</span>
+              <i></i>
+            </div>
+            <div class="launcher-copy">
+              <div class="title-line">
+                <h3>dsh-launcher</h3>
+                <span class="version-pill" id="launcher-version">v0.3.7</span>
+              </div>
+              <p id="launcher-description">通过托盘和简短命令启动、观察与管理 Harness Web profile。</p>
+              <ul class="feature-list">
+                <li data-i18n="launcherFeatureOne">后台启动并等待服务就绪</li>
+                <li data-i18n="launcherFeatureTwo">托盘管理状态、日志与进程</li>
+                <li data-i18n="launcherFeatureThree">诊断报告默认脱敏</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="download-panel">
+            <div class="download-primary">
+              <span class="download-kicker">Windows x64</span>
+              <a class="button button-primary button-download" id="installer-download" href="#" rel="noopener">
+                <span data-i18n="downloadInstaller">下载安装版</span>
+                <small id="installer-size">—</small>
+              </a>
+              <p class="download-count"><strong id="installer-count">—</strong> <span data-i18n="assetDownloads">次 GitHub 资产下载</span></p>
+            </div>
+            <div class="download-secondary">
+              <a id="portable-download" href="#" rel="noopener" data-i18n="downloadPortable">便携版 EXE</a>
+              <span><strong id="portable-count">—</strong> <span data-i18n="downloadsShort">次下载</span></span>
+            </div>
+            <div class="checksum-row">
+              <span data-i18n="checksum">SHA-256</span>
+              <code id="installer-digest">—</code>
+              <a id="installer-checksum" href="#" rel="noopener" data-i18n="checksumFile">校验文件</a>
+            </div>
+            <p class="download-note" data-i18n="downloadNote">安装包尚未使用商业代码签名，Windows 首次运行可能显示 SmartScreen。下载量是文件请求数，不代表独立用户或安装数。</p>
+          </div>
+        </article>
+
+        <details class="android-card" id="android-download">
+          <summary>
+            <span><strong data-i18n="androidTitle">Android 实验版</strong><small data-i18n="androidSummary">仅用于连接可信私有网络中的 Windows 主机</small></span>
+            <span class="experimental-pill" data-i18n="experimental">实验性</span>
+          </summary>
+          <div class="android-body">
+            <p data-i18n="androidWarning">APK 不能独立运行 DeepSeek Harness，必须连接一台已经运行 Harness 的 Windows 电脑；不要用于公网、公共 Wi-Fi 或访客网络。</p>
+            <div class="android-actions">
+              <a class="button button-secondary" id="android-download-link" href="#" rel="noopener" data-i18n="downloadAndroid">下载 Android APK</a>
+              <a id="android-release-link" href="#" rel="noopener" data-i18n="readSafety">先阅读安全说明</a>
+              <span><strong id="android-count">—</strong> <span data-i18n="downloadsShort">次下载</span></span>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section class="plugins-section" id="plugins">
+        <div class="section-heading section-heading-row">
+          <div>
+            <p class="eyebrow" data-i18n="pluginsEyebrow">按需组合</p>
+            <h2 data-i18n="pluginsTitle">为 Harness 加上可观察性</h2>
+            <p data-i18n="pluginsLead">每个插件独立发布、固定版本安装，并标明最近验证日期。</p>
+          </div>
+          <a class="text-link" href="https://github.com/Wanbinyu/wanbinyu-harness-toolbox" rel="noopener" data-i18n="viewCatalog">查看目录源码</a>
+        </div>
+        <div class="plugin-grid" id="plugin-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="method-section">
+        <div class="method-copy">
+          <p class="eyebrow" data-i18n="methodEyebrow">目录不是认证</p>
+          <h2 data-i18n="methodTitle">“已验证”意味着什么？</h2>
+          <p data-i18n="methodBody">Toolbox 会核对公开仓库、包版本、Release 资产、bundle 清单、patch 文件、安装说明和兼容范围。它提供可重复的检查证据，但不代替源码审计，也不构成 DeepSeek 官方认证。</p>
+        </div>
+        <div class="method-list">
+          <div><span>01</span><p data-i18n="methodOne">安装地址固定到明确版本，不跟随默认分支漂移。</p></div>
+          <div><span>02</span><p data-i18n="methodTwo">网站在构建时读取 GitHub 元数据，浏览页面时不调用统计接口。</p></div>
+          <div><span>03</span><p data-i18n="methodThree">下载按钮直接指向你的 GitHub Release，因此计入对应资产下载量。</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Wanbinyu DSH Toolbox</strong>
+        <p data-i18n="footerBody">面向 DeepSeek Harness 的独立第三方插件与配套工具索引。</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Wanbinyu/wanbinyu-harness-toolbox" rel="noopener">GitHub</a>
+        <a href="https://github.com/Wanbinyu/wanbinyu-harness-toolbox/issues" rel="noopener">Issues</a>
+        <a href="https://github.com/deepseek-ai/deepseek-harness" rel="noopener">DeepSeek Harness</a>
+      </div>
+    </footer>
+
+    <template id="plugin-template">
+      <article class="plugin-card">
+        <div class="plugin-visual"><img alt="" loading="lazy"></div>
+        <div class="plugin-content">
+          <div class="plugin-meta"><span class="plugin-kind"></span><span class="plugin-version"></span></div>
+          <h3></h3>
+          <p class="plugin-description"></p>
+          <div class="compatibility"><span data-i18n="compatibleWith">兼容</span><strong></strong></div>
+          <div class="install-command"><code></code><button type="button" data-i18n="copy">复制</button></div>
+          <div class="plugin-footer">
+            <span class="verified-date"></span>
+            <a rel="noopener" data-i18n="details">详情</a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <noscript>此页面需要 JavaScript 读取本地项目目录。所有下载仍可在 GitHub Releases 中获取。</noscript>
+  </body>
+</html>
