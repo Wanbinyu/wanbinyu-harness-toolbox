@@ -37,6 +37,12 @@ async function fetchRelease(owner, repo, tag) {
   return response.json()
 }
 
+async function fetchReleases(owner, repo) {
+  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases?per_page=100`, { headers })
+  if (!response.ok) throw new Error(`${owner}/${repo} release history: ${response.status} ${response.statusText}`)
+  return response.json()
+}
+
 function downloadUrls(project) {
   if (project.category === 'plugin') return [project.packageUrl]
   return [
@@ -74,6 +80,19 @@ for (const project of catalog.projects) {
       }
     }
 
+    const downloadTotals = {}
+    if (project.category === 'tool') {
+      const releaseHistory = await fetchReleases(owner, repo)
+      const stableReleases = releaseHistory.filter(release => !release.draft && !release.prerelease && /^v\d/.test(release.tag_name))
+      for (const url of [project.installerUrl, project.portableUrl]) {
+        const name = basename(new URL(url).pathname)
+        downloadTotals[name] = stableReleases
+          .flatMap(release => release.assets ?? [])
+          .filter(asset => asset.name === name)
+          .reduce((sum, asset) => sum + asset.download_count, 0)
+      }
+    }
+
     projectStats[project.name] = {
       fetchedAt: new Date().toISOString(),
       releases: [...releases.values()].map(release => ({
@@ -82,6 +101,7 @@ for (const project of catalog.projects) {
         url: release.html_url,
       })),
       assets,
+      ...(Object.keys(downloadTotals).length > 0 ? { downloadTotals } : {}),
     }
   } catch (error) {
     const cachedProject = cachedStats?.projects?.[project.name]

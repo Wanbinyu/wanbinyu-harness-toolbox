@@ -11,6 +11,7 @@
     <script type="module" src="./app.js"></script>
   </head>
   <body>
+    <canvas class="water-background" id="water-background" aria-hidden="true"></canvas>
     <a class="skip-link" href="#main" data-i18n="skip">跳到主要内容</a>
 
     <header class="site-header">
@@ -86,7 +87,7 @@
             <div class="launcher-copy">
               <div class="title-line">
                 <h3>dsh-launcher</h3>
-                <span class="version-pill" id="launcher-version">v0.3.7</span>
+                <span class="version-pill" id="launcher-version">v0.4.0</span>
               </div>
               <p id="launcher-description">通过托盘和简短命令启动、观察与管理 Harness Web profile。</p>
               <ul class="feature-list">
@@ -108,7 +109,7 @@
             </div>
             <div class="download-secondary">
               <a id="portable-download" href="#" rel="noopener" data-i18n="downloadPortable">便携版 EXE</a>
-              <span><strong id="portable-count">—</strong> <span data-i18n="downloadsShort">次下载</span></span>
+              <span><strong id="portable-count">—</strong> <span data-i18n="cumulativeDownloadsShort">次累计下载</span></span>
             </div>
             <div class="checksum-row">
               <span data-i18n="checksum">SHA-256</span>

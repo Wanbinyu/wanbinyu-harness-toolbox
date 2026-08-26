@@ -33,6 +33,28 @@ body {
   color: var(--ink);
 }
 
+.water-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: .92;
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
 a { color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { font: inherit; }
@@ -333,6 +355,7 @@ noscript { display: block; padding: 1rem; background: #4a2d1c; color: white; tex
 }
 
 @media (max-width: 660px) {
+  .water-background { opacity: .72; }
   .site-header { min-height: 70px; }
   .brand-copy small { display: none; }
   .hero, .launcher-section, .plugins-section, .method-section, .site-footer { width: min(calc(100% - 1.25rem), var(--max-width)); }
@@ -356,6 +379,7 @@ noscript { display: block; padding: 1rem; background: #4a2d1c; color: white; tex
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .water-background { display: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }

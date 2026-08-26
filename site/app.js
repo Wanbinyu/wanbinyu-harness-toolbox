@@ -1,3 +1,5 @@
+import './waves.js'
+
 const translations = {
   zh: {
     skip: '跳到主要内容', navLauncher: '启动器', navPlugins: '插件', navTrust: '验证',
@@ -10,7 +12,7 @@ const translations = {
     trustPrivateTitle: '隐私优先', trustPrivateBody: '网站无遥测、无广告、无第三方字体', trustCompatTitle: '兼容记录', trustCompatBody: '明确记录已验证的 Harness 版本',
     launcherEyebrow: '推荐入口', launcherTitle: '从 Windows 启动器开始', launcherLead: '双击或输入短命令启动 Harness Web；托盘负责状态、日志、重启和退出。',
     launcherFeatureOne: '后台启动并等待服务就绪', launcherFeatureTwo: '托盘管理状态、日志与进程', launcherFeatureThree: '诊断报告默认脱敏',
-    downloadInstaller: '下载安装版', assetDownloads: '次 GitHub 资产下载', downloadPortable: '便携版 EXE', downloadsShort: '次下载', checksum: 'SHA-256', checksumFile: '校验文件',
+    downloadInstaller: '下载安装版', assetDownloads: '次 GitHub 安装包累计下载', downloadPortable: '便携版 EXE', cumulativeDownloadsShort: '次累计下载', downloadsShort: '次下载', checksum: 'SHA-256', checksumFile: '校验文件',
     downloadNote: '安装包尚未使用商业代码签名，Windows 首次运行可能显示 SmartScreen。下载量是文件请求数，不代表独立用户或安装数。',
     androidTitle: 'Android 实验版', androidSummary: '仅用于连接可信私有网络中的 Windows 主机', experimental: '实验性',
     androidWarning: 'APK 不能独立运行 DeepSeek Harness，必须连接一台已经运行 Harness 的 Windows 电脑；不要用于公网、公共 Wi-Fi 或访客网络。',
@@ -32,7 +34,7 @@ const translations = {
     trustPrivateTitle: 'Privacy first', trustPrivateBody: 'No telemetry, ads, or third-party fonts', trustCompatTitle: 'Compatibility', trustCompatBody: 'Tested Harness versions are recorded',
     launcherEyebrow: 'Recommended entry point', launcherTitle: 'Start with the Windows launcher', launcherLead: 'Double-click or use a short command to start Harness Web; the tray manages status, logs, restarts, and exit.',
     launcherFeatureOne: 'Starts in the background and waits until ready', launcherFeatureTwo: 'Tray controls status, logs, and processes', launcherFeatureThree: 'Diagnostic reports are redacted by default',
-    downloadInstaller: 'Download installer', assetDownloads: 'GitHub asset downloads', downloadPortable: 'Portable EXE', downloadsShort: 'downloads', checksum: 'SHA-256', checksumFile: 'Checksum file',
+    downloadInstaller: 'Download installer', assetDownloads: 'cumulative GitHub installer downloads', downloadPortable: 'Portable EXE', cumulativeDownloadsShort: 'cumulative downloads', downloadsShort: 'downloads', checksum: 'SHA-256', checksumFile: 'Checksum file',
     downloadNote: 'The installer is not commercially code-signed, so Windows may show SmartScreen on first run. Download counts are file requests, not unique users or installations.',
     androidTitle: 'Experimental Android client', androidSummary: 'Connects only to a Windows host on a trusted private network', experimental: 'Experimental',
     androidWarning: 'The APK cannot run DeepSeek Harness by itself. It requires a Windows PC already running Harness and must not be used on the public internet, public Wi-Fi, or guest networks.',
@@ -79,6 +81,10 @@ function releaseAsset(projectName, url) {
   return state.stats?.projects?.[projectName]?.assets?.[assetName(url)] ?? null
 }
 
+function cumulativeDownloads(projectName, url) {
+  return state.stats?.projects?.[projectName]?.downloadTotals?.[assetName(url)] ?? releaseAsset(projectName, url)?.downloadCount
+}
+
 function renderLauncher(tool) {
   document.querySelector('#launcher-version').textContent = `v${tool.latestVersion}`
   document.querySelector('#launcher-description').textContent = state.language === 'zh' ? tool.descriptionZh : tool.description
@@ -88,9 +94,9 @@ function renderLauncher(tool) {
   const installerLink = document.querySelector('#installer-download')
   installerLink.href = tool.installerUrl
   document.querySelector('#installer-size').textContent = formatSize(installer?.size)
-  document.querySelector('#installer-count').textContent = formatCount(installer?.downloadCount)
+  document.querySelector('#installer-count').textContent = formatCount(cumulativeDownloads(tool.name, tool.installerUrl))
   document.querySelector('#portable-download').href = tool.portableUrl
-  document.querySelector('#portable-count').textContent = formatCount(portable?.downloadCount)
+  document.querySelector('#portable-count').textContent = formatCount(cumulativeDownloads(tool.name, tool.portableUrl))
   document.querySelector('#installer-checksum').href = tool.installerChecksumUrl
   document.querySelector('#installer-digest').textContent = installer?.digest?.replace('sha256:', '') ?? '—'
 

@@ -7,11 +7,12 @@ import { fileURLToPath } from 'node:url'
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const html = await readFile(resolve(root, 'dist', 'index.html'), 'utf8')
 const app = await readFile(resolve(root, 'dist', 'app.js'), 'utf8')
+const waves = await readFile(resolve(root, 'dist', 'waves.js'), 'utf8')
 const catalog = JSON.parse(await readFile(resolve(root, 'dist', 'plugins.json'), 'utf8'))
 const stats = JSON.parse(await readFile(resolve(root, 'dist', 'release-stats.json'), 'utf8'))
 
 test('site is privacy-preserving at runtime', () => {
-  const source = `${html}\n${app}`
+  const source = `${html}\n${app}\n${waves}`
   assert.doesNotMatch(source, /googletagmanager|google-analytics|_vercel\/insights|plausible\.io/i)
   assert.match(html, /connect-src 'self'/)
   assert.equal(stats.runtimeAnalytics, false)
@@ -33,6 +34,7 @@ test('launcher downloads stay on GitHub Release assets', () => {
   const installer = stats.projects['dsh-launcher'].assets['dsh-launcher-setup.exe']
   assert.equal(typeof installer.downloadCount, 'number')
   assert.match(installer.digest, /^sha256:/)
+  assert.ok(stats.projects['dsh-launcher'].downloadTotals['dsh-launcher-setup.exe'] >= installer.downloadCount)
 })
 
 test('page has accessible structure and responsive hooks', () => {
@@ -40,4 +42,7 @@ test('page has accessible structure and responsive hooks', () => {
   assert.match(html, /class="skip-link"/)
   assert.match(html, /aria-live="polite"/)
   assert.match(html, /meta name="viewport"/)
+  assert.match(html, /id="water-background" aria-hidden="true"/)
+  assert.match(waves, /prefers-reduced-motion: reduce/)
+  assert.doesNotMatch(waves, /fetch\(|XMLHttpRequest|WebSocket/)
 })
