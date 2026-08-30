@@ -11,7 +11,7 @@
 
 - [在线打开 DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
 - [发布文章：把 DeepSeek Harness 的启动、插件与验证放到一个入口](docs/articles/dsh-toolbox-launch-2026-08-26.md)
-- Windows 启动器已更新至 [`dsh-launcher v0.4.0`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.4.0)，新增 Harness 一键安装、更新、修复和受管卸载。
+- Windows 启动器已更新至 [`dsh-launcher v0.5.0`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.0)，新增跨作者插件与 Skills 推荐、已安装检测和来源健康检查。
 
 ## 插件 Bundle
 
@@ -32,7 +32,7 @@
 
 | 项目 | 类型 | 功能 | 使用 |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘管理。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.4.0/dsh-launcher-setup.exe)。 |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘提供插件与 Skills 推荐。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.0/dsh-launcher-setup.exe)。 |
 
 启动器不是 Cordis 插件，也不需要 `cordis.yml` 或 `dsh.bundle`。把它单列可以避免将“能扩展 Harness 的插件”和“帮助启动 Harness 的工具”混为一谈。
 

@@ -38,6 +38,9 @@ test('launcher downloads stay on GitHub Release assets', () => {
 })
 
 test('page has accessible structure and responsive hooks', () => {
+  const launcher = catalog.projects.find(project => project.name === 'dsh-launcher')
+  assert.ok(launcher)
+
   assert.match(html, /<main id="main">/)
   assert.match(html, /class="skip-link"/)
   assert.match(html, /aria-live="polite"/)
@@ -45,7 +48,7 @@ test('page has accessible structure and responsive hooks', () => {
   assert.match(html, /id="water-background" aria-hidden="true"/)
   assert.match(html, /<script defer src="\.\/waves\.js"><\/script>/)
   assert.doesNotMatch(html, /id="installer-download" href="#"/)
-  assert.match(html, /id="installer-download" href="https:\/\/github\.com\/Wanbinyu\/dsh-launcher\/releases\/download\/v0\.4\.0\/dsh-launcher-setup\.exe"/)
+  assert.match(html, new RegExp(`id="installer-download" href="${launcher.installerUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`))
   assert.match(waves, /prefers-reduced-motion: reduce/)
   assert.doesNotMatch(waves, /fetch\(|XMLHttpRequest|WebSocket/)
 })

@@ -10,7 +10,7 @@ An independent third-party index of plugins and companion tools for [DeepSeek Ha
 ## Latest Release
 
 - [Open DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
-- Windows launcher [`dsh-launcher v0.4.0`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.4.0) now supports one-click Harness installation, updates, repair, and managed removal.
+- Windows launcher [`dsh-launcher v0.5.0`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.0) adds a multi-publisher plugin and Skills guide, installed-item detection, and opt-in source health checks.
 
 ## Plugin Bundles
 
@@ -31,7 +31,7 @@ Exact, version-pinned Release installation commands are stored in [`plugins.json
 
 | Project | Type | What it provides | Use |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray management. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.4.0/dsh-launcher-setup.exe). |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray plugin and Skills recommendations. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.0/dsh-launcher-setup.exe). |
 
 The launcher is not a Cordis plugin and does not need `cordis.yml` or `dsh.bundle`. Keeping it separate avoids confusing Harness extensions with tools that help start Harness.
 
