@@ -25,7 +25,7 @@
 | [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.5` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
 | [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.5` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
 | [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.5` | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.1.0-rc.5` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
-| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.10` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2` |
+| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.11` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
 
 每个插件的精确 Release 安装命令记录在 [`plugins.json`](plugins.json) 中，避免默认分支更新后安装结果发生变化。
 

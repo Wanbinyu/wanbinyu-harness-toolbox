@@ -24,12 +24,17 @@ async function fetchJson(url) {
   return response.json()
 }
 
-async function fetchText(url) {
-  const response = await fetch(url, {
-    headers: { accept: 'text/plain', 'user-agent': 'wanbinyu-harness-toolbox' },
-  })
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
-  return response.text()
+function encodeContentPath(path) {
+  return path.split('/').map(segment => encodeURIComponent(segment)).join('/')
+}
+
+async function fetchRepoText(owner, repo, ref, path) {
+  const file = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeContentPath(path)}?ref=${encodeURIComponent(ref)}`)
+  if (Array.isArray(file) || file.type !== 'file' || typeof file.content !== 'string') {
+    throw new Error(`${path} is not a repository file`)
+  }
+  if (file.encoding !== 'base64') throw new Error(`${path} uses unsupported encoding ${file.encoding}`)
+  return Buffer.from(file.content, 'base64').toString('utf8')
 }
 
 function releaseTag(url) {
@@ -64,7 +69,6 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
     const [, owner, repo] = match
     repository = await fetchJson(`https://api.github.com/repos/${owner}/${repo}`)
     const ref = repository.default_branch
-    const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${ref}`
 
     if (project.category === 'plugin') {
       requiredString(project.packageVersion, `${prefix}.packageVersion`)
@@ -76,7 +80,7 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       if (project.patchFile !== 'cordis.patch.yml') {
         fail(`${project.name}: patchFile must be cordis.patch.yml`)
       }
-      const packageText = await fetchText(`${rawBase}/package.json`)
+      const packageText = await fetchRepoText(owner, repo, ref, 'package.json')
       const packageJson = JSON.parse(packageText)
       if (packageJson.version !== project.latestVersion) {
         fail(`${project.name}: catalog version ${project.latestVersion} != package version ${packageJson.version}`)
@@ -85,7 +89,7 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
         if (packageJson.name !== project.bundlePackage) {
           fail(`${project.name}: bundlePackage ${project.bundlePackage} != package name ${packageJson.name}`)
         }
-        const pluginPackage = JSON.parse(await fetchText(`${rawBase}/packages/${project.name}/package.json`))
+        const pluginPackage = JSON.parse(await fetchRepoText(owner, repo, ref, `packages/${project.name}/package.json`))
         if (pluginPackage.version !== project.packageVersion) {
           fail(`${project.name}: packageVersion ${project.packageVersion} != plugin package version ${pluginPackage.version}`)
         }
@@ -95,9 +99,9 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       if (packageJson.dsh?.bundle?.patch !== './cordis.patch.yml') {
         fail(`${project.name}: package.json does not declare ./cordis.patch.yml`)
       }
-      const patchText = await fetchText(`${rawBase}/cordis.patch.yml`)
+      const patchText = await fetchRepoText(owner, repo, ref, 'cordis.patch.yml')
       if (!patchText.includes('insert:')) fail(`${project.name}: cordis.patch.yml has no insert section`)
-      const readme = await fetchText(`${rawBase}/README.md`)
+      const readme = await fetchRepoText(owner, repo, ref, 'README.md')
       if (!/dsh plugin .* add /i.test(readme)) fail(`${project.name}: README.md has no dsh plugin install command`)
       if (!/0\.1\.[01]-rc/i.test(readme)) fail(`${project.name}: README.md has no Harness compatibility statement`)
       const release = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)

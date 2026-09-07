@@ -24,7 +24,7 @@ These projects provide `dsh.bundle.patch` in `package.json` and ship a `cordis.p
 | [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.5` | Active request, peak concurrency, result, and provider-group monitoring. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
 | [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.5` | Explicit provider connectivity, latency, capability, and failure checks. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
 | [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.5` | Read-only Git status, diff, summary, commit, history, and refs tools. | Harness `0.1.0-rc.5` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
-| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.10` | A local, state-aware desktop companion with task status, actions, and completion feedback. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` |
+| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.11` | A local, state-aware desktop companion with task status, actions, and completion feedback. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
 
 Exact, version-pinned Release installation commands are stored in [`plugins.json`](plugins.json), so installs do not change when a default branch moves.
 
