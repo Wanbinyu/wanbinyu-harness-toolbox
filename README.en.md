@@ -1,5 +1,8 @@
 # Wanbinyu Harness Toolbox
 
+> **Source-only compatibility fix, 2026-09-11**: catalog entries identify the host versions verified for each released archive. Launcher blocks plugin selection when the host is unknown or unverified. Existing installers and plugin archives have not been replaced; they do not gain these fixes automatically.
+
+
 [简体中文](README.md) | [English](README.en.md)
 
 An independent third-party index of plugins and companion tools for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`).

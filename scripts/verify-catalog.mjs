@@ -71,6 +71,11 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
     const ref = repository.default_branch
 
     if (project.category === 'plugin') {
+      if (!Array.isArray(project.releasedHarnessVersions) || project.releasedHarnessVersions.length === 0 ||
+          project.releasedHarnessVersions.some(version => !/^\d+\.\d+\.\d+-rc\.\d+$/.test(version))) {
+        fail(`${project.name}: releasedHarnessVersions must identify tested archive hosts`)
+      }
+      requiredString(project.sourceCompatibilityNote, `${prefix}.sourceCompatibilityNote`)
       requiredString(project.packageVersion, `${prefix}.packageVersion`)
       requiredString(project.releaseUrl, `${prefix}.releaseUrl`)
       requiredString(project.packageUrl, `${prefix}.packageUrl`)
@@ -80,7 +85,9 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       if (project.patchFile !== 'cordis.patch.yml') {
         fail(`${project.name}: patchFile must be cordis.patch.yml`)
       }
-      const packageText = await fetchRepoText(owner, repo, ref, 'package.json')
+      // Validate the downloadable artifact's tag, not newer unreleased source.
+      const artifactRef = releaseTag(project.releaseUrl)
+      const packageText = await fetchRepoText(owner, repo, artifactRef, 'package.json')
       const packageJson = JSON.parse(packageText)
       if (packageJson.version !== project.latestVersion) {
         fail(`${project.name}: catalog version ${project.latestVersion} != package version ${packageJson.version}`)
@@ -89,7 +96,7 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
         if (packageJson.name !== project.bundlePackage) {
           fail(`${project.name}: bundlePackage ${project.bundlePackage} != package name ${packageJson.name}`)
         }
-        const pluginPackage = JSON.parse(await fetchRepoText(owner, repo, ref, `packages/${project.name}/package.json`))
+        const pluginPackage = JSON.parse(await fetchRepoText(owner, repo, artifactRef, `packages/${project.name}/package.json`))
         if (pluginPackage.version !== project.packageVersion) {
           fail(`${project.name}: packageVersion ${project.packageVersion} != plugin package version ${pluginPackage.version}`)
         }
@@ -99,9 +106,9 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       if (packageJson.dsh?.bundle?.patch !== './cordis.patch.yml') {
         fail(`${project.name}: package.json does not declare ./cordis.patch.yml`)
       }
-      const patchText = await fetchRepoText(owner, repo, ref, 'cordis.patch.yml')
+      const patchText = await fetchRepoText(owner, repo, artifactRef, 'cordis.patch.yml')
       if (!patchText.includes('insert:')) fail(`${project.name}: cordis.patch.yml has no insert section`)
-      const readme = await fetchRepoText(owner, repo, ref, 'README.md')
+      const readme = await fetchRepoText(owner, repo, artifactRef, 'README.md')
       if (!/dsh plugin .* add /i.test(readme)) fail(`${project.name}: README.md has no dsh plugin install command`)
       if (!/0\.1\.[01]-rc/i.test(readme)) fail(`${project.name}: README.md has no Harness compatibility statement`)
       const release = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
