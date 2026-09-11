@@ -1,6 +1,6 @@
 # Wanbinyu Harness 工具箱
 
-> **2026-09-11 源码修复，尚未发布安装包**：插件目录现在区分下载包已验证的 Harness 版本和未发布源码适配。旧版插件包不可直接用于 Harness 0.1.5；Launcher 在宿主版本未知或不在已验证列表时禁止勾选插件。现有 EXE 和 Release 包不会因本次源码提交自动更新。
+> **2026-09-11 发布更新 / Release update**：六个插件修复包和 Launcher v0.5.2 已发布。插件下载包已验证 Harness 0.1.1-rc.2、0.1.5-rc.2；其他宿主版本不会自动视为兼容。
 
 
 [简体中文](README.md) | [English](README.en.md)
@@ -15,7 +15,7 @@
 - [在线打开 DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
 - [发布文章：把 DeepSeek Harness 的启动、插件与验证放到一个入口](docs/articles/dsh-toolbox-launch-2026-08-26.md)
 - 插件目录已更新至 DeepSeek Harness `0.1.2-rc.1` 适配版本，包含新版 DSH peer 依赖安装兼容修复。
-- Windows 启动器已更新至 [`dsh-launcher v0.5.1`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.1)，新增跨作者插件与 Skills 推荐、已安装检测和来源健康检查。
+- Windows 启动器已更新至 [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2)，新增跨作者插件与 Skills 推荐、已安装检测和来源健康检查。
 
 ## 插件 Bundle
 
@@ -23,12 +23,12 @@
 
 | 项目 | 当前版本 | 功能 | 兼容性 |
 | --- | --- | --- | --- |
-| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.5` | 按 provider/model 统计费用、会话额度和 Web 费用条。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
-| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.6` | 显示只读、脱敏的供应商错误诊断和处理建议。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
-| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.5` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
-| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.5` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
-| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.5` | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.1.0-rc.5` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
-| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.11` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.1.0-rc.6` 至 `rc.8`、`0.1.1-rc.1` 至 `rc.2`、`0.1.2-rc.1` |
+| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.6` | 按 provider/model 统计费用、会话额度和 Web 费用条。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.7` | 显示只读、脱敏的供应商错误诊断和处理建议。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.6` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.6` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.6` | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.12` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 
 每个插件的精确 Release 安装命令记录在 [`plugins.json`](plugins.json) 中，避免默认分支更新后安装结果发生变化。
 
@@ -36,7 +36,7 @@
 
 | 项目 | 类型 | 功能 | 使用 |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘提供插件与 Skills 推荐。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.1/dsh-launcher-setup.exe)。 |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘提供插件与 Skills 推荐。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher-setup.exe)。 |
 
 启动器不是 Cordis 插件，也不需要 `cordis.yml` 或 `dsh.bundle`。把它单列可以避免将“能扩展 Harness 的插件”和“帮助启动 Harness 的工具”混为一谈。
 

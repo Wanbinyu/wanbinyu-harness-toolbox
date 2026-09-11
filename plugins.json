@@ -17,22 +17,22 @@
       "type": "host-ui-bundle",
       "description": "Per-model cost accounting, session quota progress, and a composer cost strip.",
       "descriptionZh": "按模型查看费用、Token 用量、会话额度与输入区费用进度。",
-      "dshCompatibility": "Released archive: 0.1.1-rc.2 / 0.1.2-rc.1 only. Harness 0.1.5 support is in source, unreleased.",
-      "packageVersion": "0.4.1",
+      "dshCompatibility": "0.1.1-rc.2 / 0.1.5-rc.2 (verified release archive)",
+      "packageVersion": "0.4.2",
       "bundlePackage": "dsh-billing-community-bundle",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.5/dsh-billing-community-bundle-0.6.5.tgz",
-      "latestVersion": "0.6.5",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.5",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.5/dsh-billing-community-bundle-0.6.5.tgz",
-      "lastVerified": "2026-09-07",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.6/dsh-billing-community-bundle-0.6.6.tgz",
+      "latestVersion": "0.6.6",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.6",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.6/dsh-billing-community-bundle-0.6.6.tgz",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
-        "0.1.2-rc.1"
+        "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "0.1.5-rc.2 compatibility changes are source-only; existing release archives have not been replaced."
+      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
     },
     {
       "name": "dsh-error-lens",
@@ -41,22 +41,22 @@
       "type": "host-ui-bundle",
       "description": "Read-only, redacted provider error diagnostics with actionable failure categories.",
       "descriptionZh": "只读且经过脱敏的供应商错误诊断，并给出可执行的故障分类与处理建议。",
-      "dshCompatibility": "Released archive: 0.1.1-rc.2 / 0.1.2-rc.1 only. Harness 0.1.5 support is in source, unreleased.",
+      "dshCompatibility": "0.1.1-rc.2 / 0.1.5-rc.2 (verified release archive)",
       "nodeCompatibility": ">=22.19.0",
-      "packageVersion": "0.1.6",
+      "packageVersion": "0.1.7",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-error-lens/releases/download/v0.1.6/dsh-error-lens-0.1.6.tgz",
-      "latestVersion": "0.1.6",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-error-lens/releases/tag/v0.1.6",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-error-lens/releases/download/v0.1.6/dsh-error-lens-0.1.6.tgz",
-      "lastVerified": "2026-09-07",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-error-lens/releases/download/v0.1.7/dsh-error-lens-0.1.7.tgz",
+      "latestVersion": "0.1.7",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-error-lens/releases/tag/v0.1.7",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-error-lens/releases/download/v0.1.7/dsh-error-lens-0.1.7.tgz",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
-        "0.1.2-rc.1"
+        "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "0.1.5-rc.2 compatibility changes are source-only; existing release archives have not been replaced."
+      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
     },
     {
       "name": "dsh-concurrency-meter",
@@ -65,22 +65,22 @@
       "type": "host-ui-bundle",
       "description": "Read-only active request, peak concurrency, result, and provider-group monitoring.",
       "descriptionZh": "只读显示活动请求、峰值并发、执行结果和供应商分组状态。",
-      "dshCompatibility": "Released archive: 0.1.1-rc.2 / 0.1.2-rc.1 only. Harness 0.1.5 support is in source, unreleased.",
+      "dshCompatibility": "0.1.1-rc.2 / 0.1.5-rc.2 (verified release archive)",
       "nodeCompatibility": ">=22.19.0",
-      "packageVersion": "0.1.5",
+      "packageVersion": "0.1.6",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-concurrency-meter/releases/download/v0.1.5/dsh-concurrency-meter-0.1.5.tgz",
-      "latestVersion": "0.1.5",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-concurrency-meter/releases/tag/v0.1.5",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-concurrency-meter/releases/download/v0.1.5/dsh-concurrency-meter-0.1.5.tgz",
-      "lastVerified": "2026-09-07",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-concurrency-meter/releases/download/v0.1.6/dsh-concurrency-meter-0.1.6.tgz",
+      "latestVersion": "0.1.6",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-concurrency-meter/releases/tag/v0.1.6",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-concurrency-meter/releases/download/v0.1.6/dsh-concurrency-meter-0.1.6.tgz",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
-        "0.1.2-rc.1"
+        "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "0.1.5-rc.2 compatibility changes are source-only; existing release archives have not been replaced."
+      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
     },
     {
       "name": "dsh-provider-probe",
@@ -89,22 +89,22 @@
       "type": "host-ui-bundle",
       "description": "Explicit provider connectivity, latency, capability, and failure-guidance checks.",
       "descriptionZh": "手动检查供应商连通性、延迟、模型能力与常见失败原因。",
-      "dshCompatibility": "Released archive: 0.1.1-rc.2 / 0.1.2-rc.1 only. Harness 0.1.5 support is in source, unreleased.",
+      "dshCompatibility": "0.1.1-rc.2 / 0.1.5-rc.2 (verified release archive)",
       "nodeCompatibility": ">=22.19.0",
-      "packageVersion": "0.3.5",
+      "packageVersion": "0.3.6",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-provider-probe/releases/download/v0.3.5/dsh-provider-probe-0.3.5.tgz",
-      "latestVersion": "0.3.5",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-provider-probe/releases/tag/v0.3.5",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-provider-probe/releases/download/v0.3.5/dsh-provider-probe-0.3.5.tgz",
-      "lastVerified": "2026-09-07",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-provider-probe/releases/download/v0.3.6/dsh-provider-probe-0.3.6.tgz",
+      "latestVersion": "0.3.6",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-provider-probe/releases/tag/v0.3.6",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-provider-probe/releases/download/v0.3.6/dsh-provider-probe-0.3.6.tgz",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
-        "0.1.2-rc.1"
+        "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "0.1.5-rc.2 compatibility changes are source-only; existing release archives have not been replaced."
+      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
     },
     {
       "name": "dsh-plugin-git-inspect",
@@ -113,22 +113,22 @@
       "type": "host-bundle",
       "description": "Read-only Git status, diff, diff-stat, log, show, and refs tools for DeepSeek Harness agents.",
       "descriptionZh": "为 Harness Agent 提供只读 Git 状态、差异、历史、提交与引用检查工具。",
-      "dshCompatibility": "Released archive: 0.1.1-rc.2 / 0.1.2-rc.1 only. Harness 0.1.5 support is in source, unreleased.",
+      "dshCompatibility": "0.1.1-rc.2 / 0.1.5-rc.2 (verified release archive)",
       "nodeCompatibility": ">=22.19.0",
-      "packageVersion": "0.3.5",
+      "packageVersion": "0.3.6",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-plugin-git-inspect/releases/download/v0.3.5/dsh-plugin-git-inspect-0.3.5.tgz",
-      "latestVersion": "0.3.5",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-plugin-git-inspect/releases/tag/v0.3.5",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-plugin-git-inspect/releases/download/v0.3.5/dsh-plugin-git-inspect-0.3.5.tgz",
-      "lastVerified": "2026-09-07",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-plugin-git-inspect/releases/download/v0.3.6/dsh-plugin-git-inspect-0.3.6.tgz",
+      "latestVersion": "0.3.6",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-plugin-git-inspect/releases/tag/v0.3.6",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-plugin-git-inspect/releases/download/v0.3.6/dsh-plugin-git-inspect-0.3.6.tgz",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
-        "0.1.2-rc.1"
+        "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "0.1.5-rc.2 compatibility changes are source-only; existing release archives have not been replaced."
+      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
     },
     {
       "name": "dsh-companion",
@@ -137,22 +137,22 @@
       "type": "host-ui-bundle",
       "description": "A local, state-aware companion overlay with task status, animations, and completion feedback.",
       "descriptionZh": "本地状态感知桌面伙伴，通过动画、任务状态和完成反馈展示 Agent 正在做什么。",
-      "dshCompatibility": "Released archive: 0.1.1-rc.2 / 0.1.2-rc.1 only. Harness 0.1.5 support is in source, unreleased.",
+      "dshCompatibility": "0.1.1-rc.2 / 0.1.5-rc.2 (verified release archive)",
       "nodeCompatibility": ">=22.19.0",
-      "packageVersion": "0.1.11",
+      "packageVersion": "0.1.12",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-companion/releases/download/v0.1.11/dsh-companion-0.1.11.tgz",
-      "latestVersion": "0.1.11",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-companion/releases/tag/v0.1.11",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-companion/releases/download/v0.1.11/dsh-companion-0.1.11.tgz",
-      "lastVerified": "2026-09-07",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-companion/releases/download/v0.1.12/dsh-companion-0.1.12.tgz",
+      "latestVersion": "0.1.12",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-companion/releases/tag/v0.1.12",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-companion/releases/download/v0.1.12/dsh-companion-0.1.12.tgz",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
-        "0.1.2-rc.1"
+        "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "0.1.5-rc.2 compatibility changes are source-only; existing release archives have not been replaced."
+      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
     },
     {
       "name": "dsh-launcher",
@@ -162,14 +162,14 @@
       "description": "Background tray launcher, managed Harness setup, and a plugin/Skills recommendation guide for the Web profile.",
       "descriptionZh": "通过托盘和简短命令启动、安装与管理 Harness Web profile，并提供插件与 Skills 推荐向导。",
       "platform": "windows",
-      "latestVersion": "0.5.1",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.1",
-      "installerUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.1/dsh-launcher-setup.exe",
-      "installerChecksumUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.1/dsh-launcher-setup.exe.sha256",
-      "portableUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.1/dsh-launcher.exe",
-      "portableChecksumUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.1/dsh-launcher.exe.sha256",
-      "install": "Download and run dsh-launcher-setup.exe from the v0.5.1 Release.",
-      "lastVerified": "2026-09-07",
+      "latestVersion": "0.5.2",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2",
+      "installerUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher-setup.exe",
+      "installerChecksumUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher-setup.exe.sha256",
+      "portableUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher.exe",
+      "portableChecksumUrl": "https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher.exe.sha256",
+      "install": "Download and run dsh-launcher-setup.exe from the v0.5.2 Release.",
+      "lastVerified": "2026-09-11",
       "verificationStatus": "verified",
       "experimentalDownloads": [
         {

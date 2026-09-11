@@ -1,6 +1,6 @@
 {
   "name": "wanbinyu-harness-toolbox",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "description": "Independent project index and verification checks for DeepSeek Harness plugins and tools",
   "type": "module",

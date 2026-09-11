@@ -1,6 +1,6 @@
 # Wanbinyu Harness Toolbox
 
-> **Source-only compatibility fix, 2026-09-11**: catalog entries identify the host versions verified for each released archive. Launcher blocks plugin selection when the host is unknown or unverified. Existing installers and plugin archives have not been replaced; they do not gain these fixes automatically.
+> **2026-09-11 release update**: six fixed plugin archives and Launcher v0.5.2 are published. Plugin archives are verified with Harness 0.1.1-rc.2 and 0.1.5-rc.2; other hosts require verification.
 
 
 [简体中文](README.md) | [English](README.en.md)
@@ -14,7 +14,7 @@ An independent third-party index of plugins and companion tools for [DeepSeek Ha
 
 - [Open DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
 - The plugin catalog now points to DeepSeek Harness `0.1.2-rc.1` compatible builds, including the rc peer-dependency install fix.
-- Windows launcher [`dsh-launcher v0.5.1`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.1) adds a multi-publisher plugin and Skills guide, installed-item detection, and opt-in source health checks.
+- Windows launcher [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2) adds a multi-publisher plugin and Skills guide, installed-item detection, and opt-in source health checks.
 
 ## Plugin Bundles
 
@@ -22,12 +22,12 @@ These projects provide `dsh.bundle.patch` in `package.json` and ship a `cordis.p
 
 | Project | Current version | What it provides | Compatibility |
 | --- | --- | --- | --- |
-| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.5` | Per-provider/model cost accounting, session quota, and a Web cost strip. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
-| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.6` | Read-only, redacted provider error diagnostics and recovery guidance. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
-| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.5` | Active request, peak concurrency, result, and provider-group monitoring. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
-| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.5` | Explicit provider connectivity, latency, capability, and failure checks. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
-| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.5` | Read-only Git status, diff, summary, commit, history, and refs tools. | Harness `0.1.0-rc.5` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
-| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.11` | A local, state-aware desktop companion with task status, actions, and completion feedback. | Harness `0.1.0-rc.6` through `rc.8`, plus `0.1.1-rc.1` through `rc.2` and `0.1.2-rc.1` |
+| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.6` | Per-provider/model cost accounting, session quota, and a Web cost strip. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.7` | Read-only, redacted provider error diagnostics and recovery guidance. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.6` | Active request, peak concurrency, result, and provider-group monitoring. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.6` | Explicit provider connectivity, latency, capability, and failure checks. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.6` | Read-only Git status, diff, summary, commit, history, and refs tools. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.12` | A local, state-aware desktop companion with task status, actions, and completion feedback. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 
 Exact, version-pinned Release installation commands are stored in [`plugins.json`](plugins.json), so installs do not change when a default branch moves.
 
@@ -35,7 +35,7 @@ Exact, version-pinned Release installation commands are stored in [`plugins.json
 
 | Project | Type | What it provides | Use |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray plugin and Skills recommendations. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.1/dsh-launcher-setup.exe). |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray plugin and Skills recommendations. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher-setup.exe). |
 
 The launcher is not a Cordis plugin and does not need `cordis.yml` or `dsh.bundle`. Keeping it separate avoids confusing Harness extensions with tools that help start Harness.
 
