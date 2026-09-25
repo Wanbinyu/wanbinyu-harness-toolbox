@@ -22,17 +22,17 @@
       "bundlePackage": "dsh-billing-community-bundle",
       "bundleManifest": "package.json:dsh.bundle.patch",
       "patchFile": "cordis.patch.yml",
-      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.6/dsh-billing-community-bundle-0.6.6.tgz",
-      "latestVersion": "0.6.6",
-      "releaseUrl": "https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.6",
-      "packageUrl": "https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.6/dsh-billing-community-bundle-0.6.6.tgz",
-      "lastVerified": "2026-09-11",
+      "install": "dsh plugin --profile web add https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.7/dsh-billing-community-bundle-0.6.7.tgz",
+      "latestVersion": "0.6.7",
+      "releaseUrl": "https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.7",
+      "packageUrl": "https://github.com/Wanbinyu/dsh-billing/releases/download/v0.6.7/dsh-billing-community-bundle-0.6.7.tgz",
+      "lastVerified": "2026-09-25",
       "verificationStatus": "verified",
       "releasedHarnessVersions": [
         "0.1.1-rc.2",
         "0.1.5-rc.2"
       ],
-      "sourceCompatibilityNote": "Published compatibility fix; the linked archive contains the current Harness API adaptation."
+      "sourceCompatibilityNote": "v0.6.7 prices official DeepSeek routes. Host compatibility remains the published 0.1.1-rc.2 and 0.1.5-rc.2 archive verification."
     },
     {
       "name": "dsh-error-lens",

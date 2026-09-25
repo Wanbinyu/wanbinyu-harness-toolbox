@@ -15,6 +15,7 @@ An independent third-party index of plugins and companion tools for [DeepSeek Ha
 - [Open DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
 - The plugin catalog now points to DeepSeek Harness `0.1.2-rc.1` compatible builds, including the rc peer-dependency install fix.
 - Windows launcher [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2) adds a multi-publisher plugin and Skills guide, installed-item detection, and opt-in source health checks.
+- [`dsh-billing v0.6.7`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.7) is published. Official DeepSeek routes use the current price card at the call timestamp.
 
 ## Plugin Bundles
 
@@ -22,7 +23,7 @@ These projects provide `dsh.bundle.patch` in `package.json` and ship a `cordis.p
 
 | Project | Current version | What it provides | Compatibility |
 | --- | --- | --- | --- |
-| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.6` | Per-provider/model cost accounting, session quota, and a Web cost strip. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.7` | Per-provider/model cost accounting, session quota, and a Web cost strip. Official DeepSeek routes are priced at the call timestamp. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 | [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.7` | Read-only, redacted provider error diagnostics and recovery guidance. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 | [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.6` | Active request, peak concurrency, result, and provider-group monitoring. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 | [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.6` | Explicit provider connectivity, latency, capability, and failure checks. | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |

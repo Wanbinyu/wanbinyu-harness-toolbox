@@ -16,6 +16,7 @@
 - [发布文章：把 DeepSeek Harness 的启动、插件与验证放到一个入口](docs/articles/dsh-toolbox-launch-2026-08-26.md)
 - 插件目录已更新至 DeepSeek Harness `0.1.2-rc.1` 适配版本，包含新版 DSH peer 依赖安装兼容修复。
 - Windows 启动器已更新至 [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2)，新增跨作者插件与 Skills 推荐、已安装检测和来源健康检查。
+- [`dsh-billing v0.6.7`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.7) 已发布。官方 DeepSeek 路由按调用时间使用现行价目。
 
 ## 插件 Bundle
 
@@ -23,7 +24,7 @@
 
 | 项目 | 当前版本 | 功能 | 兼容性 |
 | --- | --- | --- | --- |
-| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.6` | 按 provider/model 统计费用、会话额度和 Web 费用条。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.7` | 按 provider/model 统计费用、会话额度和 Web 费用条。官方 DeepSeek 路由按调用时间计价。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 | [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.7` | 显示只读、脱敏的供应商错误诊断和处理建议。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 | [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.6` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
 | [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.6` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
