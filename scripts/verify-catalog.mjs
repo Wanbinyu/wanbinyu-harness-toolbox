@@ -165,6 +165,64 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
   }
 }
 
+const communityCategories = new Set(['npm-skill', 'source-bundle', 'host-tool'])
+
+async function npmRegistry(packageName) {
+  const response = await fetch(`https://registry.npmjs.org/${packageName.replace('/', '%2F')}`, {
+    headers: { 'user-agent': 'wanbinyu-harness-toolbox' },
+  })
+  if (!response.ok) throw new Error(`npm registry ${response.status} ${response.statusText} for ${packageName}`)
+  const registry = await response.json()
+  if (registry.error !== undefined) throw new Error(`npm registry error for ${packageName}: ${registry.error}`)
+  return registry
+}
+
+if (catalog.community !== undefined) {
+  if (!Array.isArray(catalog.community)) {
+    fail('community must be an array')
+  } else {
+    for (const [index, entry] of catalog.community.entries()) {
+      const prefix = `community[${index}]`
+      for (const field of ['name', 'maintainer', 'category', 'url', 'description', 'descriptionZh', 'install', 'license', 'verificationStatus', 'submittedAt', 'discussionUrl']) {
+        requiredString(entry[field], `${prefix}.${field}`)
+      }
+      if (entry.category !== undefined && !communityCategories.has(entry.category)) {
+        fail(`${entry.name ?? prefix}: unsupported community category ${entry.category}`)
+      }
+      if (entry.verificationStatus !== undefined && entry.verificationStatus !== 'community-submitted') {
+        fail(`${entry.name ?? prefix}: community entries must use verificationStatus community-submitted`)
+      }
+      if (entry.submittedAt !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(entry.submittedAt)) {
+        fail(`${entry.name ?? prefix}: submittedAt must be YYYY-MM-DD`)
+      }
+      if (entry.discussionUrl !== undefined &&
+          !/^https:\/\/github\.com\/deepseek-ai\/deepseek-harness\/discussions\/\d+(#.+)?$/.test(entry.discussionUrl)) {
+        fail(`${entry.name ?? prefix}: discussionUrl must point to a deepseek-harness discussion`)
+      }
+      try {
+        if (entry.category === 'npm-skill' && entry.npmPackage === undefined) {
+          throw new Error('npm-skill entries must declare npmPackage')
+        }
+        if (entry.npmPackage !== undefined) {
+          const registry = await npmRegistry(entry.npmPackage)
+          if (entry.version !== undefined && registry.versions?.[entry.version] === undefined) {
+            throw new Error(`npm package ${entry.npmPackage} has no version ${entry.version}`)
+          }
+        }
+        if (entry.url !== undefined && entry.url.startsWith('https://www.npmjs.com/package/')) {
+          if (entry.npmPackage === undefined) throw new Error('npm-hosted entries must declare npmPackage')
+        } else if (entry.url !== undefined) {
+          const match = new URL(entry.url).pathname.match(/^\/([^/]+)\/([^/]+?)(?:\.git)?$/)
+          if (match === null) throw new Error('url must be a GitHub repository or npm package page')
+          await fetchJson(`https://api.github.com/repos/${match[1]}/${match[2]}`)
+        }
+      } catch (error) {
+        fail(`${entry.name ?? prefix}: ${error instanceof Error ? error.message : String(error)}`)
+      }
+    }
+  }
+}
+
 if (failures.length > 0) {
   console.error(`Catalog verification failed (${failures.length} issue${failures.length === 1 ? '' : 's'}):`)
   for (const failure of failures) console.error(`- ${failure}`)

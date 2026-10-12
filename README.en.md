@@ -40,6 +40,22 @@ Exact, version-pinned Release installation commands are stored in [`plugins.json
 
 The launcher is not a Cordis plugin and does not need `cordis.yml` or `dsh.bundle`. Keeping it separate avoids confusing Harness extensions with tools that help start Harness.
 
+## Community Listings
+
+The entries below come from community submissions ([Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)). The maintainer has checked the public repositories, npm versions, and submitted manifest materials, and lists them in the `community` block of `plugins.json` with the status `community-submitted`; **they are not independently re-tested yet**. Follow each repository's README and license before use.
+
+| Project | Maintainer | Type | Version | What it provides |
+| --- | --- | --- | --- | --- |
+| [mattpocock-skills-dsh](https://github.com/gongyijie85/mattpocock-skills-dsh) | @gongyijie85 | npm skill pack | `0.1.8` | Matt Pocock's skills adapted for DSH (25 skills). |
+| [dsh-ponytail-skills](https://github.com/gongyijie85/dsh-ponytail) | @gongyijie85 | npm skill pack | `0.1.7` | Ponytail, lazy senior dev mode (6 skills). |
+| [dsh-ecc-skills](https://github.com/gongyijie85/dsh-ecc) | @gongyijie85 | npm skill pack | `0.6.1` | Progressive port of ECC operator-system skills (274 single-file skills). |
+| [mattpocock-skills-dsh-zh](https://github.com/gongyijie85/mattpocock-skills-dsh-zh) | @gongyijie85 | npm skill pack | `0.1.6` | Full Chinese translation of the promoted mattpocock/skills set. |
+| [dsh-repo-setup](https://github.com/gongyijie85/dsh-repo-setup) | @gongyijie85 | npm skill pack | `0.1.7` | Read-only `repo_setup_scan` repository bootstrap guidance. |
+| [dsh-agent-frugality](https://github.com/gongyijie85/dsh-agent-frugality) | @gongyijie85 | npm skill pack | `0.1.5` | Multi-agent frugality defense plugin. |
+| [dsh-design-audit](https://www.npmjs.com/package/dsh-design-audit) | @gongyijie85 | npm skill pack | `0.1.4` | UI/UX audit-and-fix loop (source repository not public yet). |
+| [dsh-super-injector](https://github.com/gongyijie85/dsh-super-injector) | @gongyijie85 | host tool | `0.3.4` | Runtime hot-injection of local plugin packages (source-only, BSD-3-Clause). |
+| [dsh-memory-plus](https://github.com/QIANLING-0831/dsh-memory-plus) | @QIANLING-0831 | source bundle | — | Memory suite: CJK session search, hybrid recall, pinned memories, and skill management (host `>=0.1.5-rc.3 <0.3.0`; submitter-verified against DSH `0.2.0-rc.2` on Linux). |
+
 ## Inclusion And Verification
 
 The machine-readable catalog is [`plugins.json`](plugins.json). Run `npm run verify` to check public repositories, package versions, latest Releases, package assets, bundle manifests, patch files, README installation instructions, and launcher Release assets. For projects classified as bundles, the minimum checks are:

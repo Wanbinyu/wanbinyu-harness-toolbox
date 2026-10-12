@@ -1,6 +1,6 @@
 const translations = {
   zh: {
-    skip: '跳到主要内容', navLauncher: '启动器', navPlugins: '插件', navTrust: '验证',
+    skip: '跳到主要内容', navLauncher: '启动器', navPlugins: '插件', navCommunity: '社区', navTrust: '验证',
     eyebrow: '独立维护 · 本地优先 · 可验证', heroTitle: '让 DeepSeek Harness 更容易启动、观察和信任。',
     heroLede: '一个入口，整理启动器、状态插件和只读诊断工具。每个下载都回到可核验的 GitHub Release。',
     exploreLauncher: '下载 Windows 启动器', explorePlugins: '浏览插件',
@@ -20,9 +20,13 @@ const translations = {
     methodEyebrow: '目录不是认证', methodTitle: '“已验证”意味着什么？', methodBody: 'Toolbox 会核对公开仓库、包版本、Release 资产、bundle 清单、patch 文件、安装说明和兼容范围。它提供可重复的检查证据，但不代替源码审计，也不构成 DeepSeek 官方认证。',
     methodOne: '安装地址固定到明确版本，不跟随默认分支漂移。', methodTwo: '网站在构建时读取 GitHub 元数据，浏览页面时不调用统计接口。', methodThree: '下载按钮直接指向你的 GitHub Release，因此计入对应资产下载量。',
     footerBody: '面向 DeepSeek Harness 的独立第三方插件与配套工具索引。', unavailable: '暂不可用', dataError: '目录加载失败，请前往 GitHub 查看。',
+    communityEyebrow: '社区收录', communityTitle: '来自社区的项目',
+    communityLead: '由社区提交并附核验材料的项目，维护者核对仓库、版本与清单后收录；状态为 community-submitted，尚未独立复测。',
+    communityBy: '作者', communityListed: '收录于', discussionLink: '讨论帖',
+    kindNpmSkill: 'npm 技能包', kindSourceBundle: '源码 bundle', kindHostTool: '宿主工具',
   },
   en: {
-    skip: 'Skip to main content', navLauncher: 'Launcher', navPlugins: 'Plugins', navTrust: 'Verification',
+    skip: 'Skip to main content', navLauncher: 'Launcher', navPlugins: 'Plugins', navCommunity: 'Community', navTrust: 'Verification',
     eyebrow: 'Independent · Local-first · Verifiable', heroTitle: 'Make DeepSeek Harness easier to launch, observe, and trust.',
     heroLede: 'One place for the launcher, status plugins, and read-only diagnostics. Every download leads back to a verifiable GitHub Release.',
     exploreLauncher: 'Download for Windows', explorePlugins: 'Browse plugins',
@@ -42,6 +46,10 @@ const translations = {
     methodEyebrow: 'A catalog is not certification', methodTitle: 'What does “verified” mean?', methodBody: 'Toolbox checks public repositories, package versions, Release assets, bundle manifests, patch files, installation docs, and compatibility ranges. It provides reproducible evidence, but does not replace a source audit or constitute DeepSeek certification.',
     methodOne: 'Install URLs are pinned to explicit versions instead of drifting with a default branch.', methodTwo: 'GitHub metadata is collected at build time; viewing this page sends no analytics requests.', methodThree: 'Download buttons point directly to your GitHub Releases, so they count toward the matching asset.',
     footerBody: 'An independent index of third-party plugins and companion tools for DeepSeek Harness.', unavailable: 'Unavailable', dataError: 'Catalog failed to load. Please use GitHub instead.',
+    communityEyebrow: 'Community listings', communityTitle: 'Projects from the community',
+    communityLead: 'Community-submitted projects with verification materials, listed after checking repositories, versions, and manifests. Status is community-submitted; they are not independently re-tested.',
+    communityBy: 'By', communityListed: 'Listed', discussionLink: 'Discussion',
+    kindNpmSkill: 'npm skill pack', kindSourceBundle: 'source bundle', kindHostTool: 'host tool',
   },
 }
 
@@ -155,6 +163,30 @@ function renderPlugins(projects) {
   }
 }
 
+function renderCommunity(entries) {
+  const grid = document.querySelector('#community-grid')
+  const template = document.querySelector('#community-template')
+  if (grid === null || template === null) return
+  grid.replaceChildren()
+  const kindLabels = { 'npm-skill': 'kindNpmSkill', 'source-bundle': 'kindSourceBundle', 'host-tool': 'kindHostTool' }
+  for (const entry of entries) {
+    const card = template.content.firstElementChild.cloneNode(true)
+    card.querySelector('.plugin-kind').textContent = text(kindLabels[entry.category] ?? 'communityEyebrow')
+    card.querySelector('.plugin-version').textContent = entry.version !== undefined ? `v${entry.version}` : '—'
+    card.querySelector('h3').textContent = entry.name
+    card.querySelector('.plugin-description').textContent = state.language === 'zh' ? entry.descriptionZh : entry.description
+    card.querySelector('.community-maintainer').textContent = `@${entry.maintainer}`
+    card.querySelector('.install-command code').textContent = entry.install
+    card.querySelector('.install-command button').addEventListener('click', () => copyInstall(entry.install))
+    card.querySelector('.verified-date').textContent = `${text('communityListed')} ${entry.submittedAt}`
+    const repoLink = card.querySelector('.community-repo')
+    repoLink.href = entry.url
+    repoLink.textContent = entry.url.includes('npmjs.com') ? 'npm' : 'GitHub'
+    card.querySelector('.community-discussion').href = entry.discussionUrl
+    grid.append(card)
+  }
+}
+
 function renderCatalog() {
   const projects = state.catalog.projects
   document.querySelector('#project-count').textContent = String(projects.length)
@@ -162,6 +194,7 @@ function renderCatalog() {
   const plugins = projects.filter(project => project.category === 'plugin')
   if (launcher) renderLauncher(launcher)
   renderPlugins(plugins)
+  renderCommunity(state.catalog.community ?? [])
   document.querySelectorAll('[data-i18n]').forEach(element => {
     element.textContent = text(element.dataset.i18n)
   })

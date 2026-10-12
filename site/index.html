@@ -26,6 +26,7 @@
       <nav class="header-nav" aria-label="Primary navigation">
         <a href="#launcher" data-i18n="navLauncher">启动器</a>
         <a href="#plugins" data-i18n="navPlugins">插件</a>
+        <a href="#community" data-i18n="navCommunity">社区</a>
         <a href="#trust" data-i18n="navTrust">验证</a>
       </nav>
       <div class="language-switch" role="group" aria-label="Language">
@@ -149,6 +150,15 @@
         <div class="plugin-grid" id="plugin-grid" aria-live="polite"></div>
       </section>
 
+      <section class="plugins-section" id="community">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="communityEyebrow">社区收录</p>
+          <h2 data-i18n="communityTitle">来自社区的项目</h2>
+          <p data-i18n="communityLead">由社区提交并附核验材料的项目，维护者核对仓库、版本与清单后收录；状态为 community-submitted，尚未独立复测。</p>
+        </div>
+        <div class="plugin-grid" id="community-grid" aria-live="polite"></div>
+      </section>
+
       <section class="method-section">
         <div class="method-copy">
           <p class="eyebrow" data-i18n="methodEyebrow">目录不是认证</p>
@@ -187,6 +197,23 @@
           <div class="plugin-footer">
             <span class="verified-date"></span>
             <a rel="noopener" data-i18n="details">详情</a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <template id="community-template">
+      <article class="plugin-card">
+        <div class="plugin-visual no-image" aria-hidden="true"></div>
+        <div class="plugin-content">
+          <div class="plugin-meta"><span class="plugin-kind"></span><span class="plugin-version"></span></div>
+          <h3></h3>
+          <p class="plugin-description"></p>
+          <div class="compatibility"><span data-i18n="communityBy">作者</span><strong class="community-maintainer"></strong></div>
+          <div class="install-command"><code></code><button type="button" data-i18n="copy">复制</button></div>
+          <div class="plugin-footer">
+            <span class="verified-date"></span>
+            <span class="community-links"><a class="community-repo" rel="noopener" target="_blank">GitHub</a> · <a class="community-discussion" rel="noopener" target="_blank" data-i18n="discussionLink">讨论帖</a></span>
           </div>
         </div>
       </article>
