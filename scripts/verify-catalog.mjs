@@ -72,7 +72,7 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
 
     if (project.category === 'plugin') {
       if (!Array.isArray(project.releasedHarnessVersions) || project.releasedHarnessVersions.length === 0 ||
-          project.releasedHarnessVersions.some(version => !/^\d+\.\d+\.\d+-rc\.\d+$/.test(version))) {
+          project.releasedHarnessVersions.some(version => !/^\d+\.\d+\.\d+-(?:rc|alpha)\.\d+$/.test(version))) {
         fail(`${project.name}: releasedHarnessVersions must identify tested archive hosts`)
       }
       requiredString(project.sourceCompatibilityNote, `${prefix}.sourceCompatibilityNote`)

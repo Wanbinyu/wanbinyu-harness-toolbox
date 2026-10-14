@@ -1,6 +1,6 @@
 # Wanbinyu Harness 工具箱
 
-> **2026-09-11 发布更新 / Release update**：六个插件修复包和 Launcher v0.5.2 已发布。插件下载包已验证 Harness 0.1.1-rc.2、0.1.5-rc.2；其他宿主版本不会自动视为兼容。
+> **2026-10-15 发布更新 / Release update**：六个插件安装包已适配 Harness 0.2.1-alpha.3，并接受 0.2.0-rc.2、0.1.5-rc.2、0.1.1-rc.2。Windows 启动器仍是 v0.5.2。
 
 
 [简体中文](README.md) | [English](README.en.md)
@@ -16,7 +16,7 @@
 - [发布文章：把 DeepSeek Harness 的启动、插件与验证放到一个入口](docs/articles/dsh-toolbox-launch-2026-08-26.md)
 - 插件目录已更新至 DeepSeek Harness `0.1.2-rc.1` 适配版本，包含新版 DSH peer 依赖安装兼容修复。
 - Windows 启动器已更新至 [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2)，新增跨作者插件与 Skills 推荐、已安装检测和来源健康检查。
-- [`dsh-billing v0.6.7`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.7) 已发布。官方 DeepSeek 路由按调用时间使用现行价目。
+- [`dsh-billing v0.6.8`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.8) 已发布。官方 DeepSeek 价目仍沿用 v0.6.7，安装包适配 Harness 0.2.1-alpha.3。
 
 ## 插件 Bundle
 
@@ -24,12 +24,12 @@
 
 | 项目 | 当前版本 | 功能 | 兼容性 |
 | --- | --- | --- | --- |
-| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.7` | 按 provider/model 统计费用、会话额度和 Web 费用条。官方 DeepSeek 路由按调用时间计价。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
-| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.7` | 显示只读、脱敏的供应商错误诊断和处理建议。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
-| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.6` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
-| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.6` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
-| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.6` | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
-| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.12` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.1.1-rc.2` / `0.1.5-rc.2` |
+| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.8` | 按 provider/model 统计费用、会话额度和 Web 费用条。官方 DeepSeek 路由按调用时间计价。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.8` | 显示只读、脱敏的供应商错误诊断和处理建议。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.7` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.7` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.7` | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.13` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
 
 每个插件的精确 Release 安装命令记录在 [`plugins.json`](plugins.json) 中，避免默认分支更新后安装结果发生变化。
 
