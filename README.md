@@ -1,6 +1,6 @@
 # Wanbinyu Harness 工具箱
 
-> **2026-10-15 发布更新 / Release update**：六个插件安装包已适配 Harness 0.2.1-alpha.3，并接受 0.2.0-rc.2、0.1.5-rc.2、0.1.1-rc.2。Windows 启动器仍是 v0.5.2。
+> **2026-10-15 发布更新 / Release update**：六个插件安装包和 Windows 启动器 v0.5.3 已适配 Harness 0.2.1-alpha.3，并接受 0.2.0-rc.2、0.1.5-rc.2、0.1.1-rc.2。
 
 
 [简体中文](README.md) | [English](README.en.md)
@@ -15,7 +15,7 @@
 - [在线打开 DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
 - [发布文章：把 DeepSeek Harness 的启动、插件与验证放到一个入口](docs/articles/dsh-toolbox-launch-2026-08-26.md)
 - 插件目录已更新至 DeepSeek Harness `0.1.2-rc.1` 适配版本，包含新版 DSH peer 依赖安装兼容修复。
-- Windows 启动器已更新至 [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2)，新增跨作者插件与 Skills 推荐、已安装检测和来源健康检查。
+- Windows 启动器已更新至 [`dsh-launcher v0.5.3`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.3)。自有插件目录适配 Harness 0.2.1-alpha.3，并接受 0.2.0-rc.2、0.1.5-rc.2、0.1.1-rc.2。
 - [`dsh-billing v0.6.8`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.8) 已发布。官方 DeepSeek 价目仍沿用 v0.6.7，安装包适配 Harness 0.2.1-alpha.3。
 
 ## 插件 Bundle
@@ -37,7 +37,7 @@
 
 | 项目 | 类型 | 功能 | 使用 |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘提供插件与 Skills 推荐。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher-setup.exe)。 |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘提供插件与 Skills 推荐。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.3/dsh-launcher-setup.exe)。 |
 
 启动器不是 Cordis 插件，也不需要 `cordis.yml` 或 `dsh.bundle`。把它单列可以避免将“能扩展 Harness 的插件”和“帮助启动 Harness 的工具”混为一谈。
 

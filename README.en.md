@@ -1,6 +1,6 @@
 # Wanbinyu Harness Toolbox
 
-> **2026-10-15 release update**: six plugin archives now target Harness 0.2.1-alpha.3 and also accept 0.2.0-rc.2, 0.1.5-rc.2, and 0.1.1-rc.2. The Windows launcher remains v0.5.2.
+> **2026-10-15 release update**: six plugin archives and Windows launcher v0.5.3 now target Harness 0.2.1-alpha.3 and also accept 0.2.0-rc.2, 0.1.5-rc.2, and 0.1.1-rc.2.
 
 
 [简体中文](README.md) | [English](README.en.md)
@@ -14,7 +14,7 @@ An independent third-party index of plugins and companion tools for [DeepSeek Ha
 
 - [Open DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
 - The plugin catalog now points to DeepSeek Harness `0.1.2-rc.1` compatible builds, including the rc peer-dependency install fix.
-- Windows launcher [`dsh-launcher v0.5.2`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.2) adds a multi-publisher plugin and Skills guide, installed-item detection, and opt-in source health checks.
+- Windows launcher [`dsh-launcher v0.5.3`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.3) points its own plugin catalog at Harness 0.2.1-alpha.3 and also accepts 0.2.0-rc.2, 0.1.5-rc.2, and 0.1.1-rc.2.
 - [`dsh-billing v0.6.8`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.8) is published. The official DeepSeek price card stays on v0.6.7, and the archive targets Harness 0.2.1-alpha.3.
 
 ## Plugin Bundles
@@ -36,7 +36,7 @@ Exact, version-pinned Release installation commands are stored in [`plugins.json
 
 | Project | Type | What it provides | Use |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray plugin and Skills recommendations. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.2/dsh-launcher-setup.exe). |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows background launcher | Install, update, and repair Harness; start the Web profile by double-clicking or using `dsh` and `deepseek`, with tray plugin and Skills recommendations. | Download and run [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.3/dsh-launcher-setup.exe). |
 
 The launcher is not a Cordis plugin and does not need `cordis.yml` or `dsh.bundle`. Keeping it separate avoids confusing Harness extensions with tools that help start Harness.
 
