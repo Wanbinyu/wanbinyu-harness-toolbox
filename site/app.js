@@ -22,7 +22,7 @@ const translations = {
     footerBody: '面向 DeepSeek Harness 的独立第三方插件与配套工具索引。', unavailable: '暂不可用', dataError: '目录加载失败，请前往 GitHub 查看。',
     communityEyebrow: '社区收录', communityTitle: '来自社区的项目',
     communityLead: '由社区提交并附核验材料的项目，维护者核对仓库、版本与清单后收录；状态为 community-submitted，尚未独立复测。',
-    communityBy: '作者', communityListed: '收录于', discussionLink: '讨论帖',
+    communityBy: '作者', communityListed: '收录于', discussionLink: '讨论帖', submissionLink: '投稿 PR',
     kindNpmSkill: 'npm 技能包', kindSourceBundle: '源码 bundle', kindHostTool: '宿主工具',
   },
   en: {
@@ -48,7 +48,7 @@ const translations = {
     footerBody: 'An independent index of third-party plugins and companion tools for DeepSeek Harness.', unavailable: 'Unavailable', dataError: 'Catalog failed to load. Please use GitHub instead.',
     communityEyebrow: 'Community listings', communityTitle: 'Projects from the community',
     communityLead: 'Community-submitted projects with verification materials, listed after checking repositories, versions, and manifests. Status is community-submitted; they are not independently re-tested.',
-    communityBy: 'By', communityListed: 'Listed', discussionLink: 'Discussion',
+    communityBy: 'By', communityListed: 'Listed', discussionLink: 'Discussion', submissionLink: 'Submission PR',
     kindNpmSkill: 'npm skill pack', kindSourceBundle: 'source bundle', kindHostTool: 'host tool',
   },
 }
@@ -182,7 +182,10 @@ function renderCommunity(entries) {
     const repoLink = card.querySelector('.community-repo')
     repoLink.href = entry.url
     repoLink.textContent = entry.url.includes('npmjs.com') ? 'npm' : 'GitHub'
-    card.querySelector('.community-discussion').href = entry.discussionUrl
+    const submissionLink = card.querySelector('.community-discussion')
+    submissionLink.href = entry.submissionUrl ?? entry.discussionUrl
+    submissionLink.dataset.i18n = entry.submissionUrl !== undefined ? 'submissionLink' : 'discussionLink'
+    submissionLink.textContent = text(submissionLink.dataset.i18n)
     grid.append(card)
   }
 }

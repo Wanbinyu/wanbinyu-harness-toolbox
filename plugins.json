@@ -199,6 +199,22 @@
   ],
   "community": [
     {
+      "name": "dsh-tool-squeeze",
+      "maintainer": "w2829562572-dev",
+      "category": "source-bundle",
+      "url": "https://github.com/w2829562572-dev/dsh-tool-squeeze",
+      "version": "0.1.0",
+      "description": "Local compression of oversized log, JSON, HTML, and text tool output with original-output retention. Submitter targets Harness 0.1.0-rc.8 only; compatibility with newer Harness releases has not been independently verified.",
+      "descriptionZh": "在本地压缩过大的日志、JSON、HTML 与文本工具输出，并保留原始输出。提交者仅声明适配 Harness 0.1.0-rc.8；尚未独立验证新版 Harness 兼容性。",
+      "install": "dsh plugin --profile web add https://github.com/w2829562572-dev/dsh-tool-squeeze/releases/download/v0.1.0/dsh-tool-squeeze-0.1.0.tgz",
+      "license": "MIT",
+      "manifestNote": "package.json declares dsh.bundle.patch with cordis.patch.yml. Submitter reports 21 tests, lint, typecheck, build, benchmark and package checks; not independently re-tested. Requires Node.js >=22.19 and dsh-tools 0.1.0-rc.8.",
+      "dshCompatibility": "0.1.0-rc.8 (submitter-declared; newer hosts unverified)",
+      "submittedAt": "2026-08-21",
+      "submissionUrl": "https://github.com/Wanbinyu/wanbinyu-harness-toolbox/pull/2",
+      "verificationStatus": "community-submitted"
+    },
+    {
       "name": "mattpocock-skills-dsh",
       "maintainer": "gongyijie85",
       "category": "npm-skill",

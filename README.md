@@ -43,10 +43,11 @@
 
 ## 社区收录
 
-以下条目来自社区提交（[Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)）。维护者已核对公开仓库、npm 版本与提交的清单材料，列入 `plugins.json` 的 `community` 区块，标记为 `community-submitted`；**尚未由维护者独立复测**，使用前请以各仓库 README 与许可证为准。
+以下条目来自社区讨论（[Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)）或本仓库 PR。维护者已核对公开仓库、npm 版本与提交的清单材料，列入 `plugins.json` 的 `community` 区块，标记为 `community-submitted`；**尚未由维护者独立复测**，使用前请以各仓库 README 与许可证为准。投稿来源分别记录为 `discussionUrl` 或 `submissionUrl`。
 
 | 项目 | 维护者 | 类型 | 版本 | 说明 |
 | --- | --- | --- | --- | --- |
+| [dsh-tool-squeeze](https://github.com/w2829562572-dev/dsh-tool-squeeze) | @w2829562572-dev | 源码 bundle | `0.1.0` | 工具输出压缩与原文保留（[投稿 PR #2](https://github.com/Wanbinyu/wanbinyu-harness-toolbox/pull/2)）；仅声明兼容 Harness `0.1.0-rc.8`，新版兼容性未验证。 |
 | [mattpocock-skills-dsh](https://github.com/gongyijie85/mattpocock-skills-dsh) | @gongyijie85 | npm 技能包 | `0.1.8` | Matt Pocock 技能集 DSH 适配版（25 个技能）。 |
 | [dsh-ponytail-skills](https://github.com/gongyijie85/dsh-ponytail) | @gongyijie85 | npm 技能包 | `0.1.7` | Ponytail「资深懒人模式」6 个技能。 |
 | [dsh-ecc-skills](https://github.com/gongyijie85/dsh-ecc) | @gongyijie85 | npm 技能包 | `0.6.1` | ECC 运营体系技能渐进移植（274 个单文件技能）。 |

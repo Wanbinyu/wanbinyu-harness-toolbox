@@ -42,10 +42,11 @@ The launcher is not a Cordis plugin and does not need `cordis.yml` or `dsh.bundl
 
 ## Community Listings
 
-The entries below come from community submissions ([Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)). The maintainer has checked the public repositories, npm versions, and submitted manifest materials, and lists them in the `community` block of `plugins.json` with the status `community-submitted`; **they are not independently re-tested yet**. Follow each repository's README and license before use.
+The entries below come from community discussions ([Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)) or toolbox pull requests. The maintainer has checked the public repositories, npm versions, and submitted manifest materials, and lists them in the `community` block of `plugins.json` with the status `community-submitted`; **they are not independently re-tested yet**. Follow each repository's README and license before use. Submission sources are recorded as `discussionUrl` or `submissionUrl`.
 
 | Project | Maintainer | Type | Version | What it provides |
 | --- | --- | --- | --- | --- |
+| [dsh-tool-squeeze](https://github.com/w2829562572-dev/dsh-tool-squeeze) | @w2829562572-dev | source bundle | `0.1.0` | Tool-output compression with original-output retention ([PR #2](https://github.com/Wanbinyu/wanbinyu-harness-toolbox/pull/2)); submitter targets Harness `0.1.0-rc.8` only, newer hosts unverified. |
 | [mattpocock-skills-dsh](https://github.com/gongyijie85/mattpocock-skills-dsh) | @gongyijie85 | npm skill pack | `0.1.8` | Matt Pocock's skills adapted for DSH (25 skills). |
 | [dsh-ponytail-skills](https://github.com/gongyijie85/dsh-ponytail) | @gongyijie85 | npm skill pack | `0.1.7` | Ponytail, lazy senior dev mode (6 skills). |
 | [dsh-ecc-skills](https://github.com/gongyijie85/dsh-ecc) | @gongyijie85 | npm skill pack | `0.6.1` | Progressive port of ECC operator-system skills (274 single-file skills). |

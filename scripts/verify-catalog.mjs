@@ -183,8 +183,13 @@ if (catalog.community !== undefined) {
   } else {
     for (const [index, entry] of catalog.community.entries()) {
       const prefix = `community[${index}]`
-      for (const field of ['name', 'maintainer', 'category', 'url', 'description', 'descriptionZh', 'install', 'license', 'verificationStatus', 'submittedAt', 'discussionUrl']) {
+      for (const field of ['name', 'maintainer', 'category', 'url', 'description', 'descriptionZh', 'install', 'license', 'verificationStatus', 'submittedAt']) {
         requiredString(entry[field], `${prefix}.${field}`)
+      }
+      requiredString(entry.submissionUrl ?? entry.discussionUrl, `${prefix}.submissionUrl or discussionUrl`)
+      if (entry.submissionUrl !== undefined &&
+          !/^https:\/\/github\.com\/Wanbinyu\/wanbinyu-harness-toolbox\/pull\/\d+$/.test(entry.submissionUrl)) {
+        fail(`${entry.name ?? prefix}: submissionUrl must point to a toolbox pull request`)
       }
       if (entry.category !== undefined && !communityCategories.has(entry.category)) {
         fail(`${entry.name ?? prefix}: unsupported community category ${entry.category}`)
