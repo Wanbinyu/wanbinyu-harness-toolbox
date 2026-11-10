@@ -1,5 +1,8 @@
 # Wanbinyu Harness 工具箱
 
+> **2026-10-15 发布更新 / Release update**：六个插件安装包和 Windows 启动器 v0.5.3 已适配 Harness 0.2.1-alpha.3，并接受 0.2.0-rc.2、0.1.5-rc.2、0.1.1-rc.2。
+
+
 [简体中文](README.md) | [English](README.en.md)
 
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）的独立第三方插件与配套工具索引。
@@ -7,27 +10,57 @@
 > [!IMPORTANT]
 > 本工具箱由 [Wanbinyu](https://github.com/Wanbinyu) 独立维护，不是 DeepSeek 官方项目，也不代表 DeepSeek 官方提供支持、认证或安全保证。收录项目请以各自仓库的 README、版本和许可证为准。
 
+## 最新发布
+
+- [在线打开 DSH Toolbox](https://wanbinyu.github.io/wanbinyu-harness-toolbox/)
+- [发布文章：把 DeepSeek Harness 的启动、插件与验证放到一个入口](docs/articles/dsh-toolbox-launch-2026-08-26.md)
+- 插件目录已更新至 DeepSeek Harness `0.1.2-rc.1` 适配版本，包含新版 DSH peer 依赖安装兼容修复。
+- Windows 启动器已更新至 [`dsh-launcher v0.5.3`](https://github.com/Wanbinyu/dsh-launcher/releases/tag/v0.5.3)。自有插件目录适配 Harness 0.2.1-alpha.3，并接受 0.2.0-rc.2、0.1.5-rc.2、0.1.1-rc.2。
+- [`dsh-billing v0.6.8`](https://github.com/Wanbinyu/dsh-billing/releases/tag/v0.6.8) 已发布。官方 DeepSeek 价目仍沿用 v0.6.7，安装包适配 Harness 0.2.1-alpha.3。
+
 ## 插件 Bundle
 
 下列项目提供 `package.json` 中的 `dsh.bundle.patch`，并附带 `cordis.patch.yml`，可以通过 Harness profile 的插件流程安装：
 
-| 项目 | 功能 | 兼容性 | 安装 |
+| 项目 | 当前版本 | 功能 | 兼容性 |
 | --- | --- | --- | --- |
-| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | 按 provider/model 统计费用、会话额度和 Web 费用条。 | Harness `0.1.0-rc.x` | `dsh plugin --profile web add github:Wanbinyu/dsh-billing` |
-| [dsh-tool-squeeze](https://github.com/w2829562572-dev/dsh-tool-squeeze) | 对超大日志、JSON、HTML 和文本工具输出进行证据保留型压缩。 | Harness `0.1.0-rc.8`；Node.js `>=22.19.0` | `dsh plugin --profile web add github:w2829562572-dev/dsh-tool-squeeze` |
-| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.1.0-rc.x`；Node.js `>=22.19.0` | `dsh plugin --profile web add github:Wanbinyu/dsh-plugin-git-inspect` |
+| [dsh-billing](https://github.com/Wanbinyu/dsh-billing) | `0.6.8` | 按 provider/model 统计费用、会话额度和 Web 费用条。官方 DeepSeek 路由按调用时间计价。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-error-lens](https://github.com/Wanbinyu/dsh-error-lens) | `0.1.8` | 显示只读、脱敏的供应商错误诊断和处理建议。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-concurrency-meter](https://github.com/Wanbinyu/dsh-concurrency-meter) | `0.1.7` | 监控活动请求、峰值并发、执行结果和供应商分组。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-provider-probe](https://github.com/Wanbinyu/dsh-provider-probe) | `0.3.7` | 手动检查供应商连通性、延迟、能力和常见故障。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-plugin-git-inspect](https://github.com/Wanbinyu/dsh-plugin-git-inspect) | `0.3.7` | 提供只读的 Git 状态、diff、摘要、提交、历史和 refs 工具。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+| [dsh-companion](https://github.com/Wanbinyu/dsh-companion) | `0.1.13` | 本地状态感知桌面伙伴，显示任务状态、动作和完成反馈。 | Harness `0.2.1-alpha.3`，并接受 `0.2.0-rc.2` / `0.1.5-rc.2` / `0.1.1-rc.2` |
+
+每个插件的精确 Release 安装命令记录在 [`plugins.json`](plugins.json) 中，避免默认分支更新后安装结果发生变化。
 
 ## 配套工具
 
 | 项目 | 类型 | 功能 | 使用 |
 | --- | --- | --- | --- |
-| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows CLI 工具 | 用 `dsh` 或 `deepseek` 快捷启动 Harness Web profile 并打开浏览器。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.3.4/dsh-launcher-setup.exe)。 |
+| [dsh-launcher](https://github.com/Wanbinyu/dsh-launcher) | Windows 后台启动器 | 一键安装、更新和修复 Harness；双击或用 `dsh`、`deepseek` 启动 Web，并通过托盘提供插件与 Skills 推荐。 | 下载并运行 [`dsh-launcher-setup.exe`](https://github.com/Wanbinyu/dsh-launcher/releases/download/v0.5.3/dsh-launcher-setup.exe)。 |
 
 启动器不是 Cordis 插件，也不需要 `cordis.yml` 或 `dsh.bundle`。把它单列可以避免将“能扩展 Harness 的插件”和“帮助启动 Harness 的工具”混为一谈。
 
+## 社区收录
+
+以下条目来自社区讨论（[Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)）或本仓库 PR。维护者已核对公开仓库、npm 版本与提交的清单材料，列入 `plugins.json` 的 `community` 区块，标记为 `community-submitted`；**尚未由维护者独立复测**，使用前请以各仓库 README 与许可证为准。投稿来源分别记录为 `discussionUrl` 或 `submissionUrl`。
+
+| 项目 | 维护者 | 类型 | 版本 | 说明 |
+| --- | --- | --- | --- | --- |
+| [dsh-tool-squeeze](https://github.com/w2829562572-dev/dsh-tool-squeeze) | @w2829562572-dev | 源码 bundle | `0.1.0` | 工具输出压缩与原文保留（[投稿 PR #2](https://github.com/Wanbinyu/wanbinyu-harness-toolbox/pull/2)）；仅声明兼容 Harness `0.1.0-rc.8`，新版兼容性未验证。 |
+| [mattpocock-skills-dsh](https://github.com/gongyijie85/mattpocock-skills-dsh) | @gongyijie85 | npm 技能包 | `0.1.8` | Matt Pocock 技能集 DSH 适配版（25 个技能）。 |
+| [dsh-ponytail-skills](https://github.com/gongyijie85/dsh-ponytail) | @gongyijie85 | npm 技能包 | `0.1.7` | Ponytail「资深懒人模式」6 个技能。 |
+| [dsh-ecc-skills](https://github.com/gongyijie85/dsh-ecc) | @gongyijie85 | npm 技能包 | `0.6.1` | ECC 运营体系技能渐进移植（274 个单文件技能）。 |
+| [mattpocock-skills-dsh-zh](https://github.com/gongyijie85/mattpocock-skills-dsh-zh) | @gongyijie85 | npm 技能包 | `0.1.6` | Matt Pocock 技能集中文全译版。 |
+| [dsh-repo-setup](https://github.com/gongyijie85/dsh-repo-setup) | @gongyijie85 | npm 技能包 | `0.1.7` | 只读 `repo_setup_scan` 仓库引导工具。 |
+| [dsh-agent-frugality](https://github.com/gongyijie85/dsh-agent-frugality) | @gongyijie85 | npm 技能包 | `0.1.5` | 多智能体节流防御插件。 |
+| [dsh-design-audit](https://www.npmjs.com/package/dsh-design-audit) | @gongyijie85 | npm 技能包 | `0.1.4` | UI/UX 审查与优化闭环（源码仓库暂未公开）。 |
+| [dsh-super-injector](https://github.com/gongyijie85/dsh-super-injector) | @gongyijie85 | 宿主工具 | `0.3.4` | 运行时热注入本地插件包（仅源码，BSD-3-Clause）。 |
+| [dsh-memory-plus](https://github.com/QIANLING-0831/dsh-memory-plus) | @QIANLING-0831 | 源码 bundle | — | 记忆插件集：中文检索、混合召回、固定记忆与技能管理（宿主 `>=0.1.5-rc.3 <0.3.0`，提交者已在 Linux 上对 DSH `0.2.0-rc.2` 验证）。 |
+
 ## 收录与核验标准
 
-目录中的 `plugins.json` 提供机器可读数据。可以运行 `npm run verify` 自动检查公开仓库、版本、bundle 清单、patch 文件、README 安装说明和 launcher Release 资产。对于可声明为 bundle 的项目，至少核对以下内容：
+目录中的 `plugins.json` 提供机器可读数据。可以运行 `npm run verify` 自动检查公开仓库、包版本、最新 Release、安装包、bundle 清单、patch 文件、README 安装说明和 launcher Release 资产。对于可声明为 bundle 的项目，至少核对以下内容：
 
 - `package.json` 包含 `dsh.bundle.patch`，且指向仓库内的 patch 文件。
 - patch 文件能插入仓库实际提供的插件包，并写明所需配置。
@@ -43,6 +76,19 @@
 可以在 GitHub 搜索 [`dsh-plugin`](https://github.com/topics/dsh-plugin) 话题，但话题本身不等于插件资格。收录前请检查 bundle 清单、安装路径和 README，不要只按仓库名称或 star 数判断。
 
 官方讨论入口：[DeepSeek Harness Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions)。本目录的展示帖：[Discussion #1045](https://github.com/deepseek-ai/deepseek-harness/discussions/1045)。
+
+## 静态工具中心
+
+在线地址：<https://wanbinyu.github.io/wanbinyu-harness-toolbox/>
+
+`site/` 使用本仓库的 `plugins.json` 生成双语响应式下载与插件目录。Release 下载量和 SHA-256 摘要在构建时从 GitHub API 获取，浏览页面时不会连接统计服务，也不会代理安装包；下载按钮直接指向固定版本的 GitHub Release 资产。
+
+```sh
+npm ci
+npm run site:build
+```
+
+构建结果位于 `dist/`。匿名 GitHub API 遇到限流时，本地构建会复用上一次成功构建的统计数据；CI 使用 `GITHUB_TOKEN` 获取当前数据。`.github/workflows/pages.yml` 会验证目录、构建网站并部署 GitHub Pages，同时每天刷新一次构建时下载量。
 
 ## 许可证
 

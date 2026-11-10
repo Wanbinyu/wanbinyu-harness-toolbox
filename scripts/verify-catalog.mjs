@@ -16,28 +16,38 @@ function requiredString(value, path) {
 }
 
 async function fetchJson(url) {
+  const authorization = process.env.GITHUB_TOKEN ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}
   const response = await fetch(url, {
-    headers: { accept: 'application/vnd.github+json', 'user-agent': 'wanbinyu-harness-toolbox' },
+    headers: { accept: 'application/vnd.github+json', 'user-agent': 'wanbinyu-harness-toolbox', ...authorization },
   })
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
   return response.json()
 }
 
-async function fetchText(url) {
-  const response = await fetch(url, {
-    headers: { accept: 'text/plain', 'user-agent': 'wanbinyu-harness-toolbox' },
-  })
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
-  return response.text()
+function encodeContentPath(path) {
+  return path.split('/').map(segment => encodeURIComponent(segment)).join('/')
 }
 
-async function checkUrl(url) {
-  const response = await fetch(url, {
-    method: 'HEAD',
-    redirect: 'follow',
-    headers: { 'user-agent': 'wanbinyu-harness-toolbox' },
-  })
-  return response.ok
+async function fetchRepoText(owner, repo, ref, path) {
+  const file = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeContentPath(path)}?ref=${encodeURIComponent(ref)}`)
+  if (Array.isArray(file) || file.type !== 'file' || typeof file.content !== 'string') {
+    throw new Error(`${path} is not a repository file`)
+  }
+  if (file.encoding !== 'base64') throw new Error(`${path} uses unsupported encoding ${file.encoding}`)
+  return Buffer.from(file.content, 'base64').toString('utf8')
+}
+
+function releaseTag(url) {
+  const match = new URL(url).pathname.match(/\/releases\/tag\/([^/]+)$/)
+  if (match === null) throw new Error(`release URL has no tag: ${url}`)
+  return decodeURIComponent(match[1])
+}
+
+function releaseAsset(release, url, label) {
+  const name = basename(new URL(url).pathname)
+  const asset = (release.assets ?? []).find(candidate => candidate.name === name)
+  if (asset === undefined) fail(`${label} ${name} is missing from ${release.tag_name}`)
+  return asset
 }
 
 if (catalog.schemaVersion !== 2) fail(`schemaVersion must be 2, got ${String(catalog.schemaVersion)}`)
@@ -59,17 +69,25 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
     const [, owner, repo] = match
     repository = await fetchJson(`https://api.github.com/repos/${owner}/${repo}`)
     const ref = repository.default_branch
-    const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${ref}`
 
     if (project.category === 'plugin') {
+      if (!Array.isArray(project.releasedHarnessVersions) || project.releasedHarnessVersions.length === 0 ||
+          project.releasedHarnessVersions.some(version => !/^\d+\.\d+\.\d+-(?:rc|alpha)\.\d+$/.test(version))) {
+        fail(`${project.name}: releasedHarnessVersions must identify tested archive hosts`)
+      }
+      requiredString(project.sourceCompatibilityNote, `${prefix}.sourceCompatibilityNote`)
       requiredString(project.packageVersion, `${prefix}.packageVersion`)
+      requiredString(project.releaseUrl, `${prefix}.releaseUrl`)
+      requiredString(project.packageUrl, `${prefix}.packageUrl`)
       if (project.bundleManifest !== 'package.json:dsh.bundle.patch') {
         fail(`${project.name}: bundleManifest must be package.json:dsh.bundle.patch`)
       }
       if (project.patchFile !== 'cordis.patch.yml') {
         fail(`${project.name}: patchFile must be cordis.patch.yml`)
       }
-      const packageText = await fetchText(`${rawBase}/package.json`)
+      // Validate the downloadable artifact's tag, not newer unreleased source.
+      const artifactRef = releaseTag(project.releaseUrl)
+      const packageText = await fetchRepoText(owner, repo, artifactRef, 'package.json')
       const packageJson = JSON.parse(packageText)
       if (packageJson.version !== project.latestVersion) {
         fail(`${project.name}: catalog version ${project.latestVersion} != package version ${packageJson.version}`)
@@ -78,7 +96,7 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
         if (packageJson.name !== project.bundlePackage) {
           fail(`${project.name}: bundlePackage ${project.bundlePackage} != package name ${packageJson.name}`)
         }
-        const pluginPackage = JSON.parse(await fetchText(`${rawBase}/packages/${project.name}/package.json`))
+        const pluginPackage = JSON.parse(await fetchRepoText(owner, repo, artifactRef, `packages/${project.name}/package.json`))
         if (pluginPackage.version !== project.packageVersion) {
           fail(`${project.name}: packageVersion ${project.packageVersion} != plugin package version ${pluginPackage.version}`)
         }
@@ -88,15 +106,11 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       if (packageJson.dsh?.bundle?.patch !== './cordis.patch.yml') {
         fail(`${project.name}: package.json does not declare ./cordis.patch.yml`)
       }
-      const patchText = await fetchText(`${rawBase}/cordis.patch.yml`)
+      const patchText = await fetchRepoText(owner, repo, artifactRef, 'cordis.patch.yml')
       if (!patchText.includes('insert:')) fail(`${project.name}: cordis.patch.yml has no insert section`)
-      const readme = await fetchText(`${rawBase}/README.md`)
+      const readme = await fetchRepoText(owner, repo, artifactRef, 'README.md')
       if (!/dsh plugin .* add /i.test(readme)) fail(`${project.name}: README.md has no dsh plugin install command`)
-      if (!/0\.1\.0-rc/i.test(readme)) fail(`${project.name}: README.md has no Harness compatibility statement`)
-    } else if (project.category === 'tool') {
-      requiredString(project.releaseUrl, `${prefix}.releaseUrl`)
-      requiredString(project.installerUrl, `${prefix}.installerUrl`)
-      requiredString(project.portableUrl, `${prefix}.portableUrl`)
+      if (!/0\.1\.[01]-rc/i.test(readme)) fail(`${project.name}: README.md has no Harness compatibility statement`)
       const release = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
       if (release.tag_name !== `v${project.latestVersion}`) {
         fail(`${project.name}: catalog version ${project.latestVersion} != latest release ${release.tag_name}`)
@@ -104,16 +118,113 @@ for (const [index, project] of (catalog.projects ?? []).entries()) {
       if (!release.html_url || project.releaseUrl !== release.html_url) {
         fail(`${project.name}: releaseUrl does not point to the latest release`)
       }
+      const packageAsset = basename(new URL(project.packageUrl).pathname)
       const assetNames = new Set((release.assets ?? []).map(asset => asset.name))
-      if (!assetNames.has(basename(new URL(project.installerUrl).pathname))) fail(`${project.name}: installer asset is missing from latest release`)
-      if (!assetNames.has(basename(new URL(project.portableUrl).pathname))) fail(`${project.name}: portable asset is missing from latest release`)
-      if (!(await checkUrl(project.installerUrl))) fail(`${project.name}: installerUrl is not reachable`)
-      if (!(await checkUrl(project.portableUrl))) fail(`${project.name}: portableUrl is not reachable`)
+      if (!assetNames.has(packageAsset)) fail(`${project.name}: package asset ${packageAsset} is missing from latest release`)
+      if (!project.install.includes(project.packageUrl)) fail(`${project.name}: install command is not pinned to packageUrl`)
+    } else if (project.category === 'tool') {
+      requiredString(project.releaseUrl, `${prefix}.releaseUrl`)
+      requiredString(project.installerUrl, `${prefix}.installerUrl`)
+      requiredString(project.installerChecksumUrl, `${prefix}.installerChecksumUrl`)
+      requiredString(project.portableUrl, `${prefix}.portableUrl`)
+      requiredString(project.portableChecksumUrl, `${prefix}.portableChecksumUrl`)
+      const expectedTag = releaseTag(project.releaseUrl)
+      const release = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(expectedTag)}`)
+      const latestRelease = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
+      if (release.tag_name !== `v${project.latestVersion}`) {
+        fail(`${project.name}: catalog version ${project.latestVersion} != release ${release.tag_name}`)
+      }
+      if (latestRelease.tag_name !== expectedTag) {
+        fail(`${project.name}: catalog release ${expectedTag} != latest release ${latestRelease.tag_name}`)
+      }
+      if (!release.html_url || project.releaseUrl !== release.html_url) {
+        fail(`${project.name}: releaseUrl does not point to the latest release`)
+      }
+      releaseAsset(release, project.installerUrl, `${project.name}: installer asset`)
+      releaseAsset(release, project.installerChecksumUrl, `${project.name}: installer checksum`)
+      releaseAsset(release, project.portableUrl, `${project.name}: portable asset`)
+      releaseAsset(release, project.portableChecksumUrl, `${project.name}: portable checksum`)
+      for (const [downloadIndex, download] of (project.experimentalDownloads ?? []).entries()) {
+        const downloadPrefix = `${prefix}.experimentalDownloads[${downloadIndex}]`
+        requiredString(download.platform, `${downloadPrefix}.platform`)
+        requiredString(download.version, `${downloadPrefix}.version`)
+        requiredString(download.releaseUrl, `${downloadPrefix}.releaseUrl`)
+        requiredString(download.assetUrl, `${downloadPrefix}.assetUrl`)
+        requiredString(download.checksumUrl, `${downloadPrefix}.checksumUrl`)
+        requiredString(download.requires, `${downloadPrefix}.requires`)
+        const tag = releaseTag(download.releaseUrl)
+        const channelRelease = await fetchJson(`https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(tag)}`)
+        releaseAsset(channelRelease, download.assetUrl, `${project.name}: ${download.platform} asset`)
+        releaseAsset(channelRelease, download.checksumUrl, `${project.name}: ${download.platform} checksum`)
+      }
     } else {
       fail(`${project.name}: unsupported category ${project.category}`)
     }
   } catch (error) {
     fail(`${project.name}: ${error instanceof Error ? error.message : String(error)}`)
+  }
+}
+
+const communityCategories = new Set(['npm-skill', 'source-bundle', 'host-tool'])
+
+async function npmRegistry(packageName) {
+  const response = await fetch(`https://registry.npmjs.org/${packageName.replace('/', '%2F')}`, {
+    headers: { 'user-agent': 'wanbinyu-harness-toolbox' },
+  })
+  if (!response.ok) throw new Error(`npm registry ${response.status} ${response.statusText} for ${packageName}`)
+  const registry = await response.json()
+  if (registry.error !== undefined) throw new Error(`npm registry error for ${packageName}: ${registry.error}`)
+  return registry
+}
+
+if (catalog.community !== undefined) {
+  if (!Array.isArray(catalog.community)) {
+    fail('community must be an array')
+  } else {
+    for (const [index, entry] of catalog.community.entries()) {
+      const prefix = `community[${index}]`
+      for (const field of ['name', 'maintainer', 'category', 'url', 'description', 'descriptionZh', 'install', 'license', 'verificationStatus', 'submittedAt']) {
+        requiredString(entry[field], `${prefix}.${field}`)
+      }
+      requiredString(entry.submissionUrl ?? entry.discussionUrl, `${prefix}.submissionUrl or discussionUrl`)
+      if (entry.submissionUrl !== undefined &&
+          !/^https:\/\/github\.com\/Wanbinyu\/wanbinyu-harness-toolbox\/pull\/\d+$/.test(entry.submissionUrl)) {
+        fail(`${entry.name ?? prefix}: submissionUrl must point to a toolbox pull request`)
+      }
+      if (entry.category !== undefined && !communityCategories.has(entry.category)) {
+        fail(`${entry.name ?? prefix}: unsupported community category ${entry.category}`)
+      }
+      if (entry.verificationStatus !== undefined && entry.verificationStatus !== 'community-submitted') {
+        fail(`${entry.name ?? prefix}: community entries must use verificationStatus community-submitted`)
+      }
+      if (entry.submittedAt !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(entry.submittedAt)) {
+        fail(`${entry.name ?? prefix}: submittedAt must be YYYY-MM-DD`)
+      }
+      if (entry.discussionUrl !== undefined &&
+          !/^https:\/\/github\.com\/deepseek-ai\/deepseek-harness\/discussions\/\d+(#.+)?$/.test(entry.discussionUrl)) {
+        fail(`${entry.name ?? prefix}: discussionUrl must point to a deepseek-harness discussion`)
+      }
+      try {
+        if (entry.category === 'npm-skill' && entry.npmPackage === undefined) {
+          throw new Error('npm-skill entries must declare npmPackage')
+        }
+        if (entry.npmPackage !== undefined) {
+          const registry = await npmRegistry(entry.npmPackage)
+          if (entry.version !== undefined && registry.versions?.[entry.version] === undefined) {
+            throw new Error(`npm package ${entry.npmPackage} has no version ${entry.version}`)
+          }
+        }
+        if (entry.url !== undefined && entry.url.startsWith('https://www.npmjs.com/package/')) {
+          if (entry.npmPackage === undefined) throw new Error('npm-hosted entries must declare npmPackage')
+        } else if (entry.url !== undefined) {
+          const match = new URL(entry.url).pathname.match(/^\/([^/]+)\/([^/]+?)(?:\.git)?$/)
+          if (match === null) throw new Error('url must be a GitHub repository or npm package page')
+          await fetchJson(`https://api.github.com/repos/${match[1]}/${match[2]}`)
+        }
+      } catch (error) {
+        fail(`${entry.name ?? prefix}: ${error instanceof Error ? error.message : String(error)}`)
+      }
+    }
   }
 }
 
